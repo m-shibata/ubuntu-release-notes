@@ -8,7 +8,6 @@ Release notes contain specific upgrade instructions for that particular release.
 
 * {ref}`ubuntu-26.04-lts-release-notes`
 * {ref}`resolute-raccoon-schedule`
-* [Ubuntu 26.04 LTS roadmap](https://discourse.ubuntu.com/t/ubuntu-26-04-lts-the-roadmap/72740)
 
 ## 25.10
 
