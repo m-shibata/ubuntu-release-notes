@@ -1,5 +1,5 @@
-(ubuntu-25.04-release-notes)=
-# Ubuntu 25.04 release notes
+(ubuntu-24.10-release-notes)=
+# Ubuntu 24.10 release notes
 
 These release notes for **Ubuntu 24.10** (Oracular Oriole) provide an overview of the release and document the known issues with Ubuntu and its flavours.
 
