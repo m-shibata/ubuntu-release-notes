@@ -1,16 +1,6 @@
 (ubuntu-25.04-release-notes)=
 # Ubuntu 25.04 release notes
 
-# Table of Contents
-
-- [Introduction](#heading--introduction)
-- [New features in 24.10](#heading--new-features-in-24-10)
-- [Known Issues](#heading--known-issues)
-- [Official flavours](#heading--official-flavours)
-- [More information](#heading--more-information)
-
-<h1 id="heading--introduction">Introduction</h1>
-
 These release notes for **Ubuntu 24.10** (Oracular Oriole) provide an overview of the release and document the known issues with Ubuntu and its flavours.
 
 ## Support lifespan
@@ -32,23 +22,24 @@ Ubuntu 24.10 will be supported for 9 months until July 2025. If you need long te
 
   Early upgrades may wish to perform these updates manually.
 
-<h1 id="heading--new-features-in-24-10">New features in 24.10</h1>
+(new-features-in-24-10)=
+## New features in 24.10
 
-## Updated Packages
+### Updated Packages
 
-### OpenSSL 3.3
+#### OpenSSL 3.3
 
 OpenSSL has been updated to version 3.3 with large performance and scalability improvements compared to openssl 3.0.
 It is now also loading configuration dropins from `/etc/ssl/openssl.conf.d` for easier customisation.
 
-## Linux kernel 🐧
+### Linux kernel 🐧
 Ubuntu 24.10 includes the new 6.11 Linux kernel that brings many new features.
 
 Crash dumps are now enabled by default for desktop and server installations. Please refer to the [Ubuntu Server Kernel crash dump](https://documentation.ubuntu.com/server/how-to/software/kernel-crash-dump/#kdump-enabled-by-default) documentation for complete details.
 
 Detailed changes are reported in the [Oracular Kernel Release Notes](https://discourse.ubuntu.com/t/introducing-kernel-6-11-for-the-24-10-oracular-oriole-release/47560) post.
 
-## systemd v256.5
+### systemd v256.5
 
 The init system was updated to systemd v256.5. See the [upstream changelog ](https://github.com/systemd/systemd/releases/tag/v256) for more information about individual features. To highlight a few things:
 
@@ -76,26 +67,26 @@ manually installed.
 
 * Ubuntu's `systemd-networkd` no longer sets `UseDomains=true` for managed network interfaces. In effect, this means that search domains configured in DHCP leases will not be reflected in `/etc/resolv.conf` by default. This change aligns Ubuntu's default behavior with that of upstream. System administrators may choose to override this default on a global, or per-interface basis. See [`systemd.network`](https://www.freedesktop.org/software/systemd/man/256/systemd.network.html#UseDomains=) for details.
 
-## Netplan v1.1 :globe_with_meridians: 
+### Netplan v1.1 🌐
 The new [version 1.1 of Netplan](https://github.com/canonical/netplan/releases/tag/1.1) introduces a custom `systemd-networkd-wait-online` logic, waiting for link-local addresses and one routable interface, as described in the https://discourse.ubuntu.com/t/spec-definition-of-an-online-system/27838. Besides improvements to the `embedded-switch-mode` setting for SR-IOV devices, the introduction of parser flag to skip broken configurations and fixes for ProtonVPN and Microsoft Azure Linux.
 
-## Toolchain Upgrades 🛠️
+### Toolchain Upgrades 🛠️
 
-* GCC :cow: is updated to 14.2, binutils to 2.43.1, and glibc to 2.40.
-* Python :snake: is updated to 3.12.7
-* LLVM :dragon: now defaults to version 19
-* Rust :crab: toolchain defaults to version 1.80
-* Golang :rat: is updated to 1.23
-* .NET 9 :robot: now available, .NET 8 support extended to IBM Power
-* OpenJDK :coffee: versions 23 and 24 (early access snapshot) are now available
+* GCC 🐄 is updated to 14.2, binutils to 2.43.1, and glibc to 2.40.
+* Python 🐍 is updated to 3.12.7
+* LLVM 🐉 now defaults to version 19
+* Rust 🦀 toolchain defaults to version 1.80
+* Golang 🐀 is updated to 1.23
+* .NET 9 🤖 now available, .NET 8 support extended to IBM Power
+* OpenJDK ☕ versions 23 and 24 (early access snapshot) are now available
 
-### OpenJDK
+#### OpenJDK
 
 OpenJDK 21 is still the default. OpenJDK 23 is included as an optional OpenJDK. An early access snapshot of OpenJDK 24  is also included. Support for OpenJDK LTS versions 17, 11 and 8 is being maintained.
 
 OpenJDK 21 and OpenJDK 17 packages are now TCK (Technology Compatibility Kit) certified on amd64, arm64, s390x, ppc64el and armhf. The Java TCK is the most comprehensive test suite that covers all aspects of Java SE specification including language features, libraries and APIs. This guarantees interoperability and conformance to standard.
 
-### .NET
+#### .NET
 
 With the release of .NET 9, Ubuntu reinforces its commitment to supporting the .NET community. .NET 9 is fully supported on Ubuntu 24.10 and is also available for Ubuntu 24.04 LTS (Noble Numbat) and Ubuntu 22.04 LTS (Jammy Jellyfish) through the [.NET Backports PPA](https://launchpad.net/~dotnet/+archive/ubuntu/backports).
 
@@ -104,15 +95,15 @@ In addition, we have expanded .NET support to the IBM Power platform for both .N
 We are also excited to introduce the new and improved [.NET Snap](https://snapcraft.io/dotnet), allowing developers to seamlessly install any supported version of .NET on any Ubuntu system.
 
 
-## Default configuration changes :gear:
+### Default configuration changes ⚙️
 
 As always there are many changes to defaults, mostly by newer versions of
 packages. But a few are worth spelling out if your former automation,
 configuration and tuning relied on those settings being one or the other way.
 
-## Ubuntu Desktop
+### Ubuntu Desktop
 
-### Installer and Upgrades
+#### Installer and Upgrades
 
 * The desktop installer now support local file paths for autoinstall import.
 
@@ -121,7 +112,7 @@ configuration and tuning relied on those settings being one or the other way.
 
 * **fprintd** has been updated and [**libfprint** supports now many other fingerprint drivers and devices](https://gitlab.freedesktop.org/libfprint/libfprint/-/releases#v1.94.8).
 
-### Store
+#### Store
 
 The App Center now includes improvements to the Manage page including:
 * Installs in progress
@@ -133,34 +124,34 @@ The App Center now includes improvements to the Manage page including:
 Third party deb installation is now also supported.
 
 
-### Security Center
+#### Security Center
 
 * A new Security Center is included. It features the ability to easily enable or disable a new experimental [permissions prompting](https://discourse.ubuntu.com/t/ubuntu-desktop-s-24-10-dev-cycle-part-5-introducing-permissions-prompting/47963/1) feature for Home directory permissions.
 * More features will be added in future Ubuntu releases.
 * Prompting is also supported by an additional seeded snap, `prompting-client`, for permissions prompt handling.
 
-### 20th Anniversary Celebration
+#### 20th Anniversary Celebration
 20 years ago, the first version of Ubuntu was released, Ubuntu 4.10 "Warty Warthog". We are celebrating this monumental anniversary with several temporary flourishes
 * The return of the original startup sound, which can be disabled via Settings > Sound
 * A 'Warty' brown accent colour that can be enabled in Settings > Appearance > Style
 * An anniversary logo
 
-### GNOME :footprints:
+#### GNOME 👣
 
 * GNOME has been updated to include new features and fixes from the latest GNOME release, [GNOME 47](https://release.gnome.org/47/).
 * In GNOME Shell and Mutter, Ubuntu includes additional patches to enhance stability and performance, which have not yet been merged upstream.
 * The Ubuntu dock now visualises snap refreshes and includes better handling for PWAs installed via the Chromium snap.
 
-### Default app changes
+#### Default app changes
 * The [Sysprof](https://apps.gnome.org/Sysprof/) app is installed by default as a new system utility. This makes it easier to discover performance issues in your apps. 
 
-### Updated Applications
+#### Updated Applications
 
-* [Firefox](https://mozilla.org/firefox/releases/) 130 :fire::fox_face:
-* [LibreOffice 24.8](https://wiki.documentfoundation.org/ReleaseNotes/24.8) :books:
-* [Thunderbird 128 "Supernova"](https://blog.thunderbird.net/2023/07/our-fastest-most-beautiful-release-ever-thunderbird-XY-supernova-is-here/) :cloud_with_lightning::bird:
+* [Firefox](https://mozilla.org/firefox/releases/) 130 🔥🦊
+* [LibreOffice 24.8](https://wiki.documentfoundation.org/ReleaseNotes/24.8) 📚
+* [Thunderbird 128 "Supernova"](https://blog.thunderbird.net/2023/07/our-fastest-most-beautiful-release-ever-thunderbird-XY-supernova-is-here/) 🌩️🐦
 
-### Updated Subsystems
+#### Updated Subsystems
 * [BlueZ 5.77](https://git.kernel.org/pub/scm/bluetooth/bluez.git/tree/ChangeLog?id=5.77) 💙
 * [Cairo 1.18.2](https://cairographics.org/news/cairo-1.18.2/) 👁️⃤
 * [Noto Color Emoji Font 2.047 with Unicode 16 support](https://blog.emojipedia.org/google-debuts-emoji-16-0-support/) 🥳
@@ -169,17 +160,17 @@ Third party deb installation is now also supported.
 * [Poppler 24.08](https://gitlab.freedesktop.org/poppler/poppler/-/blob/poppler-24.08.0/NEWS) 📝
 * [xdg-desktop-portal 1.18](https://github.com/flatpak/xdg-desktop-portal/blob/1.18.4/NEWS) ⛩️
 
-### Nvidia
+#### Nvidia
 
 Ubuntu 24.10 now defaults to Wayland instead of Xorg on machines using Nvidia graphics. If you require Xorg instead then select 'Ubuntu on Xorg' from the session menu on the login screen.
 
-## Ubuntu WSL
+### Ubuntu WSL
 
 --
 
-## Ubuntu Server
+### Ubuntu Server
 
-### Apache2
+#### Apache2
 Apache2 has been updated from Noble's 2.4.58 to the current 2.4.62, and some of the more noteworthy changes include:
 
   * htpasswd: Add support for passwords using SHA-2.
@@ -194,7 +185,7 @@ Apache2 has been updated from Noble's 2.4.58 to the current 2.4.62, and some of 
 For more details, please see the [full set of changes](https://downloads.apache.org/httpd/CHANGES_2.4.59).
 
 
-### Clamav
+#### Clamav
 Clamav is updated from version 1.0.5 to 1.3.1 in Oracular, bringing significant improvements and changes, including:
 
   * Added support for extracting and scanning attachments found in Microsoft OneNote section files.
@@ -209,7 +200,7 @@ Clamav is updated from version 1.0.5 to 1.3.1 in Oracular, bringing significant 
 
 For a comprehensive listing of changes included since Ubuntu Noble, please see the changelogs for [1.1.0](https://blog.clamav.net/2023/05/clamav-110-released.html), [1.2.0](https://blog.clamav.net/2023/08/clamav-120-feature-version-and-111-102.html), [1.3.0](https://blog.clamav.net/2023/11/clamav-130-122-105-released.html), and [1.3.1](https://blog.clamav.net/2024/04/clamav-131-123-106-patch-versions.html).
 
-### Chrony
+#### Chrony
 The chrony package in Oracular was changed to no longer ship the default Ubuntu NTP pools in `/etc/chrony/chrony.conf`. A new snippet configuration file is created in `/etc/chrony/sources.d/ubuntu-ntp-pools.sources` defining those servers. The motivation for this change is explained in [LP: #2048876](https://bugs.launchpad.net/ubuntu/+source/chrony/+bug/2048876).
 
 If you changed your `chrony.conf`, an upgrade to this version will stop at a dpkg config prompt, showing the differences between the installed file and the new one. If you chose to keep the existing `chrony.conf`, keep in mind that the Ubuntu NTP pools from `/etc/chrony/sources.d/ubuntu-ntp-pools.sources` will also be used.
@@ -218,7 +209,7 @@ If you changed your `chrony.conf`, an upgrade to this version will stop at a dpk
 
 https://discourse.ubuntu.com/t/improving-chrony-time-source-configuration-in-ubuntu/47850
 
-### cloud-init v. 24.3.1
+#### cloud-init v. 24.3.1
 Notable features beyond v. 24.1 present in Noble:
 
 - Bootspeed improvement: support for socket-based shared python process
@@ -242,7 +233,7 @@ stages are only called by systemd units and not post-production scripts
 or tools.
 - Introduce a [performance optimization by sharing the python environment and setup costs across all four boot stages with a new cloud-init-main.service](https://discourse.ubuntu.com/t/announcement-cloud-init-perfomance-optimization-single-process/47505)
 
-### Containerd
+#### Containerd
 The Containerd application was updated to version `1.7.19`. Some highlights of this update:
 
 * Remove overlayfs volatile option on temp mounts (#10332)
@@ -251,10 +242,10 @@ The Containerd application was updated to version `1.7.19`. Some highlights of t
 
 For more information, check the [upstream release notes](https://github.com/containerd/containerd/releases).
 
-### Django
+#### Django
 Django was updated from Noble's 4.2.11 to 4.2.15, which brings several bug fixes. For more information, see the upstream changelogs: [4.2.12](https://docs.djangoproject.com/en/4.2/releases/4.2.12/), [4.2.13](https://docs.djangoproject.com/en/4.2/releases/4.2.13/), [4.2.14](https://docs.djangoproject.com/en/4.2/releases/4.2.14/), [4.2.15](https://docs.djangoproject.com/en/4.2/releases/4.2.15/)
 
-### Docker
+#### Docker
 The Docker application was updated to version `26.1.3`. Some highlights of this update:
 
 * apparmor: Allow confined runc to kill containers
@@ -263,17 +254,17 @@ The Docker application was updated to version `26.1.3`. Some highlights of this 
 
 Watch out for deprecation or removal of features in this [upstream page](https://github.com/docker/cli/blob/v26.1.3/docs/deprecated.md).
 
-### unminimize
+#### unminimize
 
 unminimize has been moved to a dedicated package which can be installed with `apt-get install -y unminimize` rather than being available by default in all minimal images.
 
-### Exim4
+#### Exim4
 The Exim4 update in Oracular to 4.98 includes selected fixes from the upstream GIT repository.  This improves handling of new and old format message IDs, fixes certain crashes, refines memory usage for regexes, and avoids recording lookup credentials in the log files.  DKIM DNS record parsing is tightened up related to unexpected whitespace.
 
-### HAProxy
+#### HAProxy
 The HAProxy package was upgraded to version 2.9.9. This new version introduces performance improvements, better integration, more reliability, and a new reverse-http feature. You can learn more about it at https://www.haproxy.com/blog/announcing-haproxy-2-9.  A complete list of changes is avalilable at https://www.haproxy.org/download/2.9/src/CHANGELOG.
 
-### libvirt
+#### libvirt
 The [libvirt](https://libvirt.org) package was upgraded to version 10.6.0.  Here are the changes since Ubuntu Noble:
 
   * network: Make virtual domains resolvable from the host.
@@ -287,13 +278,13 @@ The [libvirt](https://libvirt.org) package was upgraded to version 10.6.0.  Here
 
 For more details, please see [the upstream changelog](https://www.libvirt.org/news.html).
 
-### Nginx
+#### Nginx
 Version 1.26.0 of NGINX was introduced in Oracular, bringing experimental HTTP/3 support, HTTP/2 on a per-server basis, virtual servers in the stream module, passing stream connections to listen sockets, and more.
 
-### OpenLDAP
+#### OpenLDAP
 The [OpenLDAP](https://openldap.org/) package was updated to version 2.6.8, which brings several bug fixes. For more details, please see [the upstream changelog](https://www.openldap.org/software/release/changes.html).
 
-### Openssh
+#### Openssh
 Starting with 1:9.6p1-3ubuntu17, openssh server no longer reads `~/.pam_environment` of the target system upon login.
 
 In [Linux-PAM version 1.5.0](https://github.com/linux-pam/linux-pam/releases/tag/v1.5.0), the
@@ -305,22 +296,22 @@ Systems that were relying on that behavior need to adapt, possibly via the opens
 
 Note that the default configuration in `/etc/ssh/sshd_config` and `/etc/ssh/ssh_config` is already set to send and receive locale variables, which is one of the scenarios in which `~/.pam_environment` was used in the past.
 
-### OpenVmTools
+#### OpenVmTools
 The new version 12.4.5 of open-vm-tools in oracular brings a handful of bug fixes; for details of these and existing known issues, please see the upstream release notes for [12.4.0](https://docs.vmware.com/en/VMware-Tools/12.4/rn/vmware-tools-1240-release-notes/index.html) and [12.4.5](https://docs.vmware.com/en/VMware-Tools/12.4/rn/vmware-tools-1245-release-notes/index.html).
 
-### Valkey
+#### Valkey
 Valkey version 7.2.5 is available in Oracular. Since this version is a drop-in replacement for Redis (fully compatible), and with the [recent changes of Redis' license](https://redis.io/blog/redis-adopts-dual-source-available-licensing/), a way to migrate configuration and data from Redis to Valkey is implemented in a form of a new binary package. The `valkey-redis-compat` binary package will attempt a automatic configuration and data migration from Redis to Valkey. If you did not perform any drastic change to the configuration of your Redis service, it should work straight away.  However, if you performed some substantial changes or your setup is more complex, the automation may not work. Due to that, whenever the `valkey-redis-compat` binary package is installed and the migration is attempted, the file `/etc/valkey/REDIS_MIGRATION` will be created, and the services will not start automatically. This will avoid breaking the upgrade due to an incomplete migration. After the user has checked if the migration is OK, they need to remove the `/etc/valkey/REDIS_MIGRATION` file, then the Valkey services will be able to be started again.
 
-### Percona Xtrabackup
+#### Percona Xtrabackup
 Xtrabackup was updated to the next minor version 8.0.35-31. It provides additional arm64 architecture support along with various bug fixes. For more details, see the [upstream release notes](https://docs.percona.com/percona-xtrabackup/8.0/release-notes/8.0/8.0.35-31.0.html).
 
-### PHP
+#### PHP
 PHP was upgraded to version 8.3.9, which is introduces several bug fixes.  You can read mothe about those in the upstream changelog at https://www.php.net/ChangeLog-8.php#8.3.9.
 
-### PostgreSQL
+#### PostgreSQL
 PostgreSQL was updated to version 16.4. Users running Ubuntu Noble will realize this version was also included there as part of our PostgreSQL upgrade policies. The new version introduces many bug and security fixes. More details on the changes introduced since Noble are available at https://www.postgresql.org/docs/release/16.4/ and https://www.postgresql.org/docs/release/16.3/
 
-### QEMU
+#### QEMU
 The [QEMU](https://qemu.org/) package was updated to version 9.0.2. Here are the changes since Ubuntu Noble.
 
   * The behaviour of the `-serial none` option when used together with     other `-serial` options has been corrected. Previously when `-serial none` was followed by `-serial something` the `-serial none` was effectively ignored. Now it controls the existence of the first serial port, and the following `-serial` option controls the behaviour of the second serial port; this brings it in to line with how all other cases of multiple `-serial` options work. If you have a command line that was accidentally relying on the old behaviour, you can simply delete the unnecessary `-serial none`.
@@ -352,7 +343,7 @@ For more details, please see related upstream changelogs:
 
   * [9.0](https://wiki.qemu.org/ChangeLog/9.0)
 
-### Ruby 3.3
+#### Ruby 3.3
 The default Ruby version is now version 3.3. Some compatibility changes may arise from the upgrade from version 3.2, they are:
 
 * `it` calls without arguments in a block with no ordinary parameters are deprecated. `it` will be a reference to the first block parameter in Ruby 3.4. [Feature #18980]
@@ -361,7 +352,7 @@ The default Ruby version is now version 3.3. Some compatibility changes may aris
 
 For the complete list of changes in this new version, please check the [upstream release notes](https://www.ruby-lang.org/en/news/2023/12/25/ruby-3-3-0-released/) out.
 
-### Samba
+#### Samba
 Samba was updated to 4.20.4, and major changes in the 4.20.x series are documented in the [upstream release notes](https://www.samba.org/samba/history/samba-4.20.0.html).
 
 Normally the point releases of samba in a stable series only contain bug fixes, but this time 4.20.3 added a nice new feature which is LDAP TLS/SASL channel binding support. Details are shown in the [4.20.3 release notes](https://www.samba.org/samba/history/samba-4.20.3.html).
@@ -371,77 +362,77 @@ In terms of packaging, the following changes have been done:
   * `samba-vfs-modules`: the VFS modules from this package were moved to the `samba` package, with the exception of the Ceph module, which got its own package: `samba-vfs-ceph`. The `samba-vfs-modules` package is now just a transitional package, and it can be safely removed after the release upgrade.
   * `samba-vfs-modules-extra`: this package used to contain the GlusterFS VFS module. This module was moved to a new package called `samba-vfs-glusterfs`, and `samba-vfs-modules-extra` became a transitional package. It can also be safely removed after the release upgrade.
 
-### Squid
+#### Squid
 Squid was upgraded to version 6.10. This new version includes several bug
 fixes. A complete set of changes together with a comprehensive changelog
 is available at
 https://github.com/squid-cache/squid/compare/SQUID_6_6..SQUID_6_10.
 
-### SSSD
+#### SSSD
 The [SSSD](https://sssd.io/) package was updated to version 2.9.5. Here are the changes since Ubuntu Noble.
 
   * Added `failover_primary_timeout` configuration option. This can be used to configure how often SSSD tries to reconnect to a primary server after a successful connection to a backup server. This was previously hardcoded to 31 seconds which is kept as the default value.
 
 For more details, please see [the upstream changelog](https://sssd.io/release-notes/sssd-2.9.5.html).
 
-### Subiquity
+#### Subiquity
 A new version of the Subiquity server installer has been released. Please read the full [release notes for 24.04.1](https://github.com/canonical/subiquity/releases/tag/24.04.1) on GitHub.
 
-### Ubuntu HA/Clustering
+#### Ubuntu HA/Clustering
 
-#### multipath-tools
+##### multipath-tools
 multipath-tools was updated to 0.9.9. Please visit https://github.com/opensvc/multipath-tools/blob/master/NEWS.md for notes on the changes.
 
-#### kpartx-boot
+##### kpartx-boot
 Starting with the Oracular release, the kpartx-boot package has been discontinued to align with Debian. Originally introduced to support dmraid booting, its functionality is preserved, as the kpartx package now includes everything previously provided by kpartx-boot.
 
-#### dmraid
+##### dmraid
 The dmraid package has been removed from Oracular. The rationale for its removal is outlined in https://bugs.launchpad.net/bugs/2073677, primarily due to its removal from Debian unstable and minimal upstream support. If you require this functionality, consider using alternatives like mdadm.
 
-#### Corosync
+##### Corosync
 Corosync was upgraded to version 3.1.8. This release contains mostly smaller bugfixes and improvements of Rust bindings. You can learn more about it at https://github.com/corosync/corosync/releases.
 
-#### pacemaker
+##### pacemaker
 Pacemaker was upgraded to version 2.1.8. This release includes a significant number of bug fixes and a few new features.  It also deprecates some obscure features and many C APIs in preparation for the next Pacemaker major release which will drop support for them.
 
-#### fence-agents
+##### fence-agents
 fence-agents was upgraded to version 4.15.0. In this release, we are no longer shipping the transitional fence-agents package. You should now use either the fence-agents-base package with the agents available in main or the fence-agents-extra package with the agents in universe (or both, they are split based on the repository components they are available in). A complete list of upstream changes for this version is available at https://lists.clusterlabs.org/pipermail/developers/2024-July/003567.html.
 
-#### resource-agents
+##### resource-agents
 resource-agents was upgraded to version 4.15.1. This new release introduces several bug fixes and enhancements including two new resource agents: outscale and powervs-subnet. Details on all changes introduced in this new version are available at https://lists.clusterlabs.org/pipermail/developers/2024-July/003570.html and https://lists.clusterlabs.org/pipermail/developers/2024-July/003572.html.
 
-### OpenStack
+#### OpenStack
 OpenStack has been updated to the [2024.2 (Dalmatian) release](https://releases.openstack.org/dalmatian/).  This includes packages for Aodh, Barbican, Ceilometer, Cinder, Designate, Glance, Heat, Horizon, Ironic, Keystone, Magnum, Manila, Masakari, Mistral, Neutron, Nova, Octavia, Swift, Vitrage, Watcher and Zaqar.
 
 This release is also provided for Ubuntu 24.04 LTS via the Ubuntu Cloud Archive.
 
-### Ceph
+#### Ceph
 [Ceph](http://ceph.com) has been updated to the 19.2.0 (Squid) release.
 
-### Open vSwitch (OVS) and Open Virtual Network (OVN)
+#### Open vSwitch (OVS) and Open Virtual Network (OVN)
 [Open vSwitch](https://www.openvswitch.org/) has been updated to the 3.4.0 release.
 
 [Open Virtual Network](https://www.ovn.org/) has been updated to the 24.09 release.
 
 These releases are also provided for Ubuntu 24.04 LTS via the Ubuntu Cloud Archive.
 
-### GRUB2
+#### GRUB2
 
 Chainloading of non-NX compatible versions of Windows 10 from UEFI GRUB2 might be broken on a limited subset of machines. This is  being actively investigated but the root cause haven't been found yet. If you are experiencing this, please see the linked bug for updates
 https://bugs.launchpad.net/ubuntu/+source/grub2/+bug/2084104.
 
-## Platforms
+### Platforms
 
-### Public Cloud / Cloud images
+#### Public Cloud / Cloud images
 
-#### Public Images (cloud-images.ubuntu.com) images
+##### Public Images (cloud-images.ubuntu.com) images
 
 * Release notes/image diff
   * Since 19th April 2024 we have introduced `.image_changelog.json` files to accompany published images @ https://cloud-images.ubuntu.com/. This is a JSON document listing all the package additions, removals and changes as well as noting the changelog entries for the package changes. It also highlights any CVEs addressed in those package updates. The tool used to generate these diffs is `ubuntu-cloud-image-changelog` available @ [github.com/canonical/ubuntu-cloud-image-changelog](http://github.com/canonical/ubuntu-cloud-image-changelog)
   * Diffs are generated between the image being published and the previous daily image, and also between the image being published and the previous release image.
   * These image diffs have been backported to previous published Ubuntu release too.
 
-#### LXD Containers
+##### LXD Containers
 
 LXD 24.10 Oracular Oriole containers have a more specific set of requirements for running due to changes in systemd 256.5. Starting in Oracular, systemd services (systemd-resolved, systemd-journald) have migrated to using systemd credentials. This change necessitated changes in LXD to properly run 24.10 Oracular Oriole containers. This change is landed in LXD snap channels latest/stable, 5.21/stable, and 5.0/edge. Release to 5.0/stable is planned in the near future..
 
@@ -460,30 +451,30 @@ The inverse is also true – when running an older container that lacks cgroup v
 This only affects containers launched with LXD. It does not affect virtual machines.
 
 
-#### AWS EC2
+##### AWS EC2
 
 * `/etc/ec2-version` will only show up on EC2 images
 
-#### Microsoft Azure
+##### Microsoft Azure
 
 * Canonical introduced a new way of publishing on Azure with Ubuntu 24.04 LTS, which will continue for 24.10. All Ubuntu Images for 24.10 will be available under the same offer: `ubuntu-24_10`. Derivative images, such as the minimized version of Ubuntu server are available as plans under this main offer.
 
 * Starting in 24.10 (but also backported to 20.04, 22.04 and 24.04) the values for `net.core.rmem_max` and `net.core.rmem_default` have been increased to 1048576 (the Ubuntu default is 212992). This change will apply to all newly published Ubuntu images published on Azure for the given versions. This increase in the socket receive buffer size was made to reduce UDP packet loss for some workloads.
 
-#### Google
+##### Google
 
 * Resume/suspend issue from noble [LP: #2063315](https://bugs.launchpad.net/ubuntu/+source/linux-gcp/+bug/2063315) is resolved
 * TDX support: Ubuntu images now support Confidential VMs with Intel TDX. This capability is advertised by the presence of “TDX_CAPABLE” guest OS feature flag in the image metadata. Intel TDX is now also supported on Ubuntu Jammy and Noble GCE images.
 
-##### How to report any issues resulting from these changes
+###### How to report any issues resulting from these changes
 
 If you notice any unexpected changes or bugs in the minimal images, create a new bug in [cloud-images](https://bugs.launchpad.net/cloud-images).
 
-### arm64
+#### arm64
 
 The new arm64+largemem ISO includes a kernel with 64k page size. A larger page size can increase throughput, but comes at the cost of increased memory use, making this option more suitable for servers with plenty of memory. Typical use cases for this ISO include: machine learning, databases with many large entries, high performance computing.
 
-### IBM Z and LinuxONE ![image|32x32](upload://dZM0RRlelqCcZc6RhqJGMW8DMZr.png) 
+#### IBM Z and LinuxONE ![image|32x32](upload://dZM0RRlelqCcZc6RhqJGMW8DMZr.png) 
 
 * The key package 's390-tools' was step-by-step upgraded to latest version v2.34.1 ([LP: #2073786](https://launchpad.net/bugs/2073786)), which incl. lots of updates, new tools and features, especially in the area of ap_tools/ap-check and libap - the skipped v.2.33 brought on top several modification in the Rust code and libutil ([LP: #2067355](https://launchpad.net/bugs/2067355)).
 * On top of the usual upgrade of the tool-chain, valgrind was also upgraded to it's latest v2.23, which includes support for IBM z16 hardware ([LP: #1982335](https://launchpad.net/bugs/1982335)).
@@ -498,7 +489,7 @@ The new arm64+largemem ISO includes a kernel with 64k page size. A larger page s
 * Kernel 6.11 move (via 6.10 code) the kernel image into vmalloc space, where random physical pages are used to map virtual pages ([LP: #2072661](https://launchpad.net/bugs/2072661)).
 Even if kernel 6.11 is brand new, a patch set from the next kernel for 'Vertical CPU Polarization Support Stage 2" that esp. provides improved 'cpu capacity' support for the Linux scheduler ([LP: #2072760](https://launchpad.net/bugs/2072760)) was included.
 
-### IBM POWER (ppc64el)
+#### IBM POWER (ppc64el)
 
 * KVM running in IBM PowerVM LPARs:
   Ubuntu Server 24.04 has the required technology enablement and support for running KVM in a PowerVM LPAR.
@@ -509,17 +500,19 @@ Even if kernel 6.11 is brand new, a patch set from the next kernel for 'Vertical
 * KVM virtualization continues to be supported on POWER9 bare-metal / OPAL based systems.
 * Ubuntu 24.10 includes so called 'Book3S HV nestedv2' support and fixes.
 
-### RISC-V
+#### RISC-V
 
 For an overview of supported boards see https://ubuntu.com/download/risc-v.
 
 The RISC-V Ubuntu userland is compatible with all RVA20 hardware.
 
-<h1 id="heading--known-issues">Known Issues</h1>
+
+(24-10-known-issues)=
+## Known Issues
 
 As is to be expected with any release, there are some significant known bugs that users may encounter with this release of Ubuntu. The ones we know about at this point (and some of the workarounds) are documented here, so you don't need to spend time reporting these bugs again:
 
-## General
+### General
 
 * The Live Session of the new Ubuntu Desktop installer is not localized. It is still possible to perform a non-English installation using the new installer, but internet access at install time is required to download the language packs. ([LP: #2013329](https://bugs.launchpad.net/ubuntu-release-notes/+bug/2013329))
 * ZFS with Encryption on Ubuntu 24.10 will [fail to activate the cryptoswap partition](https://bugs.launchpad.net/ubuntu/+source/subiquity/+bug/2084089).  This affects both new installs and upgrades.  We expect to address this post-release with an archive update.
@@ -542,12 +535,12 @@ GRUB_CMDLINE_LINUX="nomodeset"
 6. Finally, run `sudo update-grub` to make the change take effect.
 
 
-## Linux kernel
+### Linux kernel
 
 * A bug prevents the IO scheduler from being reset to "none" ([LP: #2083845](https://bugs.launchpad.net/bugs/2083845)): the fix is already in v6.11.2, and will be part of the first SRU kernel.
 * Support for FAN networking has been dropped in the 6.11 release kernel. It will be re-introduced in the next 6.11 kernel update shortly.
 
-## Ubuntu Desktop
+### Ubuntu Desktop
 
 * Screen reader support is present with the new desktop installer, but is incomplete ([LP: #2061015](https://launchpad.net/bugs/2061015), [LP: #2061018](https://launchpad.net/bugs/2061018), [LP: #2036962](https://launchpad.net/bugs/2036962), [LP: #2061021](https://launchpad.net/bugs/2061021))
 
@@ -569,12 +562,12 @@ GRUB_CMDLINE_LINUX="nomodeset"
 
 * Installing `ubuntu-fonts-classic` results in a non-Ubuntu font being displayed ([LP#2083683](https://bugs.launchpad.net/bugs/2083683)). To resolve this, install `gnome-tweaks` and set ‘Interface Text’ to ‘Ubuntu’.
 
-## Ubuntu Server
+### Ubuntu Server
 
-### rabbitmq-server
+#### rabbitmq-server
 Certain version hops may be unsupported due to feature flags, raising questions about how Ubuntu will maintain this package moving forward. We are currently exploring the use of snaps as a potential solution to enable smoother upgrades. For more information please read https://bugs.launchpad.net/bugs/2074309.
 
-### Installer
+#### Installer
 
 * In some situations, it is acceptable to proceed with an offline installation when the mirror is inaccessible. In this scenario, it is advised to use:
 
@@ -585,7 +578,7 @@ apt:
 
 * Network interfaces left unconfigured at install time are assumed to be configured via dhcp4. If this doesn't happen (for example, because the interface is physically not connected) the boot process will block and wait for a few minutes ([LP: #2063331](https://bugs.launchpad.net/subiquity/+bug/2063331)). This can be fixed by removing the extra interfaces from `/etc/netplan/50-cloud-init.conf` or by marking them as `optional: true`. Cloud-init is disabled on systems installed from ISO images, so settings will persist.
 
-### samba apparmor profile
+#### samba apparmor profile
 Due to [bug LP: #2063079](https://bugs.launchpad.net/ubuntu/+source/samba/+bug/2063079), the samba `smbd.service` unit file is no longer calling out to the helper script to dynamically create apparmor profile snippets according to the existing shares.
 
 By default, the `smbd` service from samba is not confined. To be affected by this bug, users have to:
@@ -595,15 +588,15 @@ By default, the `smbd` service from samba is not confined. To be affected by thi
 Therefore, only users who have taken those steps and upgrade to Noble, will be affected by this bug. An SRU to fix it will be done shortly after release.
 
 
-### Docker
+#### Docker
 
 There is a AppArmor related bug where containers cannot be promptly stopped due to the recently added AppArmor profile for `runc`. The containers are always killed with `SIGKILL` due to the denials when trying to receive a signal. More details about this bug can be found [here](https://bugs.launchpad.net/ubuntu/+source/docker.io/+bug/2063099), and a workaround is described [here](https://bugs.launchpad.net/ubuntu/+source/docker.io/+bug/2063099/comments/4).
 
-### PPC64EL
+#### PPC64EL
 
 * PMDK sees some hardware-specific failures in its test suite, which may make the software partially or fully inoperable on the ppc64el architecture. ([LP: #2061913](https://bugs.launchpad.net/ubuntu/+source/pmdk/+bug/2061913/))
 
-### Raspberry Pi
+#### Raspberry Pi
 
 * Raspberry Pi 500 is missing an entry in the flash-kernel database ([LP: #2092216](https://launchpad.net/bugs/2092216))
 
@@ -631,23 +624,24 @@ There is a AppArmor related bug where containers cannot be promptly stopped due 
 
 * On server images, re-authentication to WiFi APs when regulatory domain is set result in dmesg spam to the console ([LP: #2063365](https://launchpad.net/bugs/2063365))
 
-### ARM64 Systems with NVIDIA GPUs
+#### ARM64 Systems with NVIDIA GPUs
 
 * The current versions of the NVIDIA GPU drivers may cause hangs or crashes ([LP: #2062380](https://launchpad.net/bugs/2062380)). This will be fixed in a future driver update.
 
-### Google Compute Platform 
+#### Google Compute Platform 
 
 Nothing yet.
 
-### Microsoft Azure
+#### Microsoft Azure
 
 Nothing yet.
 
-### s390X
+#### s390X
 
 Nothing yet.
 
-<h1 id="heading--official-flavours">Official flavours</h1>
+(24-10-official-flavours)=
+## Official flavours
 
 Find the release notes for the official flavours at the following links:
 
