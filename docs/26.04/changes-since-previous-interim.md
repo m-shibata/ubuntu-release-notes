@@ -10,25 +10,7 @@ If you're upgrading to Ubuntu 26.04 LTS from the previous interim release, Ubunt
 :::{rubric} GNOME 50
 :::
 
-:::{note}
-This heading is a rubric.
-:::
-
-The GNOME desktop environment has been updated to version 50:
-
-* New application
-* Improved rendering
-
-#### GNOME 50
-
-:::{note}
-This heading is a regular heading.
-:::
-
-The GNOME desktop environment has been updated to version 50:
-
-* New application
-* Improved rendering
+The GNOME desktop environment has been updated to version 50.
 
 ### Server
 
