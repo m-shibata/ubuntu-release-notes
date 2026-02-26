@@ -4,11 +4,11 @@ Release notes for Ubuntu, summarizing new features, bug fixes and backwards-inco
 
 Release notes contain specific upgrade instructions for that particular release. See also the general guidance on how to prepare for, and perform, an upgrade: [Ubuntu Desktop](https://documentation.ubuntu.com/desktop/en/latest/how-to/upgrade-ubuntu-desktop/) or [Ubuntu Server](https://ubuntu.com/server/docs/how-to/software/upgrade-your-release/).
 
-## 25.10
+## 25.10 (Questing Quokka)
 
 * {ref}`ubuntu-25.10-release-notes`
 
-## 24.04 LTS
+## 24.04 LTS (Noble Numbat)
 
 * {ref}`changes-in-ubuntu-24.04.4`
 * {ref}`changes-in-ubuntu-24.04.3`
@@ -17,7 +17,7 @@ Release notes contain specific upgrade instructions for that particular release.
 * {ref}`ubuntu-24.04-lts-release-notes`
 * {ref}`noble-numbat-schedule`
 
-## 22.04 LTS
+## 22.04 LTS (Jammy Jellyfish)
 
 * {ref}`changes-in-ubuntu-22.04.5`
 * {ref}`changes-in-ubuntu-22.04.4`
