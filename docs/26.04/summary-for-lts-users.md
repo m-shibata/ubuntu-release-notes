@@ -3,7 +3,7 @@
 
 If you’re upgrading to Ubuntu 26.04 LTS from Ubuntu 24.04 LTS (Noble Numbat), you receive the changes that happened in the six months since Ubuntu 25.10, as well as the changes in all the previous interim releases between 24.04 LTS and 26.04 LTS.
 
-For details, see the complete interim release notes: {ref}`24.10 <ubuntu-24.10-release-notes>`, {ref}`25.04 <ubuntu-25.04-release-notes>` and {ref}`25.10 <ubuntu-25.10-release-notes>`. Finally, review the latest {ref}`changes-in-ubuntu-26.04-lts-since-ubuntu-25.10`.
+For details, see the complete interim release notes: {ref}`24.10 <ubuntu-24.10-release-notes>`, {ref}`25.04 <ubuntu-25.04-release-notes>` and {ref}`25.10 <ubuntu-25.10-release-notes>`. Finally, review the latest {ref}`ubuntu-26.04-lts-changes-since-25.10`.
 
 ## Desktop
 
