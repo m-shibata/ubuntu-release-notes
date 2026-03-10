@@ -1,10 +1,9 @@
-name: Bug report for the Security Center
-description: Create a report to help us improve
+name: Add a release note (WIP)
+description: Add a new Ubuntu release note
 labels:
-  - bug
+  - 'New release note'
 assignees:
-  - d-loose
-  - juanruitina
+  - msuchane
 body:
 - type: checkboxes
   attributes:
