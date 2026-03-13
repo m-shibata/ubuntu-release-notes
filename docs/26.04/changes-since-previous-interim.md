@@ -591,6 +591,7 @@ On systems booting via U-Boot, U-Boot should be updated to the current Plucky ve
 
 * Network interfaces left unconfigured at install time are assumed to be configured via dhcp4. If this doesn’t happen (for example, because the interface is physically not connected) the boot process will block and wait for a few minutes ([LP: #2063331](https://bugs.launchpad.net/subiquity/+bug/2063331)). This can be fixed by removing the extra interfaces from `/etc/netplan/50-cloud-init.conf` or by marking them as `optional: true`. Cloud-init is disabled on systems installed from ISO images, so settings will persist.
 
+<!--
 #### samba apparmor profile
 
 Due to [bug LP: #2063079](https://bugs.launchpad.net/ubuntu/+source/samba/+bug/2063079), the samba `smbd.service` unit file is no longer calling out to the helper script to dynamically create apparmor profile snippets according to the existing shares.
@@ -601,6 +602,7 @@ By default, the `smbd` service from samba is not confined. To be affected by thi
 * switch the `smbd` profile confinement from `complain` to `enforce`
 
 Therefore, only users who have taken those steps and upgrade to Noble, will be affected by this bug. An SRU to fix it will be done shortly after release.
+-->
 
 <!--
 #### Docker
