@@ -40,10 +40,14 @@ Older releases <archive>
 
 ## LTS releases
 
+<!--
+Still in development:
+
 ### 26.04 LTS (Resolute Raccoon)
 
 * {ref}`ubuntu-26.04-lts-release-notes`
 * {ref}`resolute-raccoon-schedule`
+-->
 
 ### 24.04 LTS (Noble Numbat)
 
