@@ -740,6 +740,21 @@ A bug prevents the I/O scheduler from being reset to “none” ([LP: #2083845](
 
 Support for FAN networking has been dropped in the 6.11 release kernel. It will be re-introduced in the next 6.11 kernel update shortly.
 
+#### Raspberry Pi 🍓
+
+* The new gnome-initial-setup has issues preventing it from working properly:
+  - The selected key layout does not persist ([LP: #2127782](https://launchpad.net/bugs/2127782))
+  - Time zone input dropdown can "wobble" ([LP: #2084611](https://launchpad.net/bugs/2084611))
+  - The hostname change is mandatory ([LP: #2093132](https://launchpad.net/bugs/2093132))
+
+* During boot on the server image, if your `cloud-init` configuration (in `user-data` on the boot partition) relies upon networking (importing SSH keys, installing packages, etc.) you *must* ensure that at least one network interface is required (`optional: false`) in `network-config` on the boot partition. This is due to netplan changes to the wait-online service (~~[LP: #2060311](https://launchpad.net/bugs/2060311)~~). Furthermore, a current issue may cause cloud-init to run before the network is ready ([LP: #2144891](https://launchpad.net/bugs/2144891))
+
+* With the removal of the `crda` package in 22.04, the method of setting the wifi regulatory domain (editing `/etc/default/crda`) no longer operates. On server images, use the `regulatory-domain` option in the Netplan configuration. On desktop images, append `cfg80211.ieee80211_regdom=GB` (substituting `GB` for the relevant country code) to the kernel command line in the `cmdline.txt` file on the boot partition  ([LP: #1951586](https://launchpad.net/bugs/1951586)).
+
+* Colours appear incorrectly in the Ubuntu App Centre ([LP: #2076919](https://launchpad.net/bugs/2076919))
+
+* On server images, re-authentication to WiFi APs when regulatory domain is set result in dmesg spam to the console ([LP: #2063365](https://launchpad.net/bugs/2063365))
+
 
 ## Official flavors
 
