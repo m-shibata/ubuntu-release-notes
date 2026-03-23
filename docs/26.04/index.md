@@ -471,6 +471,18 @@ The `linux-generic` kernel for ARM64 provides broader compatibility for ARM64 de
 
 The Ubuntu RISC-V kernel (`linux-riscv`) only supports hardware that implements the RVA23S64 ISA profile. You can't run Ubuntu 26.04 LTS on systems that don't satisfy this requirement. The RISC-V kernel in Ubuntu 24.04 LTS continues to support boards with RVA20 processor cores.
 
+#### IBM Z requirements raised to z15
+:::{versionchanged} 26.04
+:::
+
+On the IBM Z (s390s) architecture, Ubuntu 26.04 LTS now requires the z15 architectural level at minimum. As a result, you can't install Ubuntu 26.04 LTS on IBM Z generation z14 (LinuxONE II) or older.
+
+The performance on IBM Z generation z15 (LinuxONE III) and newer has improved.
+
+For more information, refer to the following release notes:
+
+- {ref}`ibm-z15-level`
+- {ref}`ibm-z14-support-removed`
 
 ### Common changes
 

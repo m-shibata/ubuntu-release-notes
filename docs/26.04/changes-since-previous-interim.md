@@ -366,6 +366,7 @@ For further details on the changes in this update, please refer to the upstream 
 
 ### Hardware support features
 
+(ibm-z15-level)=
 #### IBM Z and LinuxONE (s390x)
 
 The following provides an overview of selected and significant s390x-specific enhancements and improvements that landed in Ubuntu Server 26.04 for IBM Z and LinuxONE.
