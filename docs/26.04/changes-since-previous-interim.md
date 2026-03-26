@@ -89,6 +89,7 @@ New features and important changes in 4.23:
 * SMB3 Unix Extensions enabled by default
 * NetBios is disabled by default in the configuration file `/etc/samba/smb.conf` for fresh installs
 
+(26.04-sssd-2.12)=
 #### SSSD
 
 SSSD has been updated to version 2.12.
@@ -531,13 +532,9 @@ The `blkmapd` and `nfs-blkmap` services have been removed. From the `NEWS` file:
 >
 > Users of pNFS are advised to move to the revised SCSI/NVMe layouts  that are safe to use and don't require the use of blkmapd.
 
-#### SSSD 2.12
+#### SSSD
 
-SSSD has been updated to version 2.12.
-
-SSSD now runs under user `sssd` (instead of `root`). Make sure that `sssd` can still access secrets or integrations from its new user.
-
-The implicit files provider and domain was removed: see <https://sssd.io/docs/files-provider-deprecation.html>.
+Please see above {ref}`for the changes to the user handling <26.04-sssd-2.12>`
 
 #### PHP
 

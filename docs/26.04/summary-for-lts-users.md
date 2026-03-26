@@ -273,6 +273,8 @@ For a list of all changes and fixes, please check the [upstream releases page](h
 
 ### SSSD
 
+SSSD has been updated to version 2.12.
+
 SSSD now runs under user `sssd` (instead of `root`). Make sure that `sssd` can still access secrets or integrations from its new user.
 
 The implicit files provider and domain was removed: see <https://sssd.io/docs/files-provider-deprecation.html>.
