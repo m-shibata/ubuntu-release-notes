@@ -306,13 +306,18 @@ You can learn more at [Announcing HAProxy 3.0](https://www.haproxy.com/blog/anno
 * Rust 🦀 toolchain has been updated from version 1.75 to 1.88.
 * Golang 🐀 has been updated from version 1.22 to 1.25.
 * Zig ⚡ is now available in Ubuntu. It defaults to version 0.14.1.
+* OpenJDK has been updated from version 21 to 25, while LTS versions 8, 11, 17, 21 and OpenJDK 26 and 27 previews are also available.
 * Ubuntu Toolchains has a new [homepage](https://ubuntu.com/toolchains).
+
+### OpenJDK 25 and TCK certification
+:::{versionadded} 25.10
+:::
+
+OpenJDK 25 package is available and is TCK (Technology Compatibility Kit) certified on AMD64, ARM64, s390x, ppc64el and armhf. The Java TCK is the most comprehensive test suite that covers all aspects of Java SE specification including language features, libraries and APIs. This guarantees interoperability and conformance to standard.
 
 ### OpenJDK 21 and TCK certification
 :::{versionadded} 24.10
 :::
-
-OpenJDK defaults to 21 (LTS), while version 25 (LTS) and an early access snapshot of version 26 are now available.
 
 OpenJDK 21 and OpenJDK 17 packages are now TCK (Technology Compatibility Kit) certified on AMD64, ARM64, s390x, ppc64el and armhf. The Java TCK is the most comprehensive test suite that covers all aspects of Java SE specification including language features, libraries and APIs. This guarantees interoperability and conformance to standard.
 
@@ -360,7 +365,7 @@ Support for the PowerShell snap has been expanded to include the `arm64`, `s390x
 - New Google provider
 - Supports device registration with EntraID
 - authctl is a new command line tool to manage authd
-- Many improvements and important bug fixes such as UID/GID handling 
+- Many improvements and important bug fixes such as UID/GID handling
 
 ### New `authd` documentation
 
@@ -393,7 +398,7 @@ These profiles may cause breakage for unanticipated uses of those applications, 
 New [TPM-backed disk encryption](https://canonical-ubuntu-desktop-documentation.readthedocs-hosted.com/en/latest/explanation/hardware-backed-disk-encryption/) is available for Ubuntu Desktop. Its features include:
 
 * Passphrase support and management
-* Regeneration of the recovery key 
+* Regeneration of the recovery key
 * Better integration with firmware updates
 
 For details, see [Hardware-backed disk encryption](https://documentation.ubuntu.com/desktop/en/latest/explanation/hardware-backed-disk-encryption/) in the Ubuntu Desktop documentation.
@@ -416,19 +421,19 @@ For more details refer to [NVIDIA's documentation](https://download.nvidia.com/X
 :::{versionadded} 25.04
 :::
 
-This release brings full support for Intel® Core™ Ultra Xe2 integrated Intel® Arc™ graphics, and Intel® Arc™ B580 and B570 “Battlemage” discrete GPUs. 
+This release brings full support for Intel® Core™ Ultra Xe2 integrated Intel® Arc™ graphics, and Intel® Arc™ B580 and B570 “Battlemage” discrete GPUs.
 Moreover, the following features are also included:
 
-* Improved GPU and CPU ray tracing rendering performance in applications with Intel Embree support, such as Blender (v4.2+). Ray tracing hardware acceleration on the GPU improves frame rendering by 20-30%, due to a 2-4x speed-up for the ray tracing component. 
+* Improved GPU and CPU ray tracing rendering performance in applications with Intel Embree support, such as Blender (v4.2+). Ray tracing hardware acceleration on the GPU improves frame rendering by 20-30%, due to a 2-4x speed-up for the ray tracing component.
 * Full hardware accelerated video encoding of AVC, JPEG, HEVC, and AV1 on “Battlemage” devices.
 * Introduction of the new CCS optimization in Intel® Compute Runtime.
-* Enable debugging support for Intel Xe GPUs. 
+* Enable debugging support for Intel Xe GPUs.
 * oneAPI Level Zero Ray Tracing improves AI/ML workload speeds via Embree on SYCL
- 
+
 ### Suspend with Nvidia
 :::{versionadded} 25.10
 :::
- 
+
 Suspend-resume support is now enabled in the proprietary Nvidia driver so as to prevent corruption and freezes when waking an Nvidia desktop.
 
 ### ARM desktop platforms
@@ -523,9 +528,9 @@ For more information, refer to the following release notes:
 The `sudo-rs` tool is now the default `sudo` provider.
 
 The `sudo` tool (the original `sudo` maintained by Todd C. Miller) has been renamed to `sudo.ws`. Additionally, the `sudo-ldap` package has been removed: please switch to using LDAP authentication via PAM.
-    
+
 See [Ubuntu Server Docs](https://documentation.ubuntu.com/server/how-to/security/user-management/#sudo-rs) for configuring your default `sudo` provider and for the differences between `sudo-rs` and `sudo.ws`.
-    
+
 
 ### `rust-coreutils`
 :::{versionadded} 25.10
@@ -534,7 +539,7 @@ See [Ubuntu Server Docs](https://documentation.ubuntu.com/server/how-to/security
 The core utilities of the operating system are now provided by the [`rust-coreutils`](https://launchpad.net/ubuntu/+source/rust-coreutils) package. Among other things, this brings significant performance improvements, such as in the `base64` tool.
 
 Since `rust-coreutils` are not necessarily fully compatible yet, we continue to provide the classic GNU utilities as well. You can switch back and forth between them.
-    
+
 
 ### Linux kernel 7.0
 
