@@ -304,11 +304,22 @@ DocumentDB is now available in Ubuntu, starting with version 0.108-0. It is a po
 
 #### MariaDB is fully supported
 
+MariaDB was updated to the latest LTS version 11.8.6.
+For more information on the MariaDB LTS, see the [upstream release notes](https://mariadb.com/docs/release-notes/community-server/11.8).
+
 Starting with 26.04, MariaDB will now be provided with [full support in Ubuntu main](https://bugs.launchpad.net/ubuntu/+source/mariadb/+bug/2122095).
 
 MariaDB was updated to the latest LTS version 11.8.6. For more information on the MariaDB LTS, [see the upstream release notes](https://mariadb.com/docs/release-notes/community-server/11.8).
 
 The MySQL and MariaDB servers are mutually exclusive on Ubuntu for now.
+
+#### MySQL
+
+MySQL’s current LTS version 8.4 is provided in Ubuntu 26.04, starting with version 8.4.8. Future security fixes will be provided by 8.4.x version updates. For more information see the [upstream release notes](https://dev.mysql.com/doc/relnotes/mysql/8.4/en/).
+
+#### MySQL iShell
+
+MySQL Shell was updated to the latest LTS version, 8.4.8, to match MySQL’s version. See the [upstream release notes](https://dev.mysql.com/doc/relnotes/mysql-shell/8.4/en/) for more information.
 
 #### Percona Toolkit
 
@@ -682,14 +693,6 @@ A noteworthy change in the packaging of Postfix is that **by default it is no lo
 #### `unbound` 1.24.2
 
 Update to version 1.24.2. See the [upstream changelog](https://github.com/NLnetLabs/unbound/releases/tag/release-1.24.2).
-
-### Database fixes
-
-#### MySQL 8.4.8
-
-MySQL’s current LTS version 8.4 is provided in Ubuntu 26.04, starting with version 8.4.8. Future security fixes will be provided by 8.4.x version updates. For more information [see the upstream release notes](https://dev.mysql.com/doc/relnotes/mysql/8.4/en/).
-
-MySQL Shell was updated to the latest LTS version, 8.4.8, to match MySQL’s version. See the [upstream release notes](https://dev.mysql.com/doc/relnotes/mysql-shell/8.4/en/) for more information.
 
 <!--
 ### Development fixes
