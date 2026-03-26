@@ -164,6 +164,9 @@ Any consent that you previously granted to Ubuntu Report will not be carried ove
 
 ### OpenSSH
 
+The upgrade from 1:9.6p1 in Noble included major changes each interim release,
+overall please be aware about:
+
 * Deprecation warning for SHA1 SSHFP DNS records
 * Add a warning when the connection negotiates a non-post quantum key agreement algorithm.
 * Removes support for the weak DSA signature algorithm.

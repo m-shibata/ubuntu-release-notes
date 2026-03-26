@@ -89,6 +89,45 @@ New features and important changes in 4.23:
 * SMB3 Unix Extensions enabled by default
 * NetBios is disabled by default in the configuration file `/etc/samba/smb.conf` for fresh installs
 
+#### SSSD
+
+SSSD has been updated to version 2.12.
+
+SSSD now runs under user `sssd` (instead of `root`). Make sure that `sssd` can still access secrets or integrations from its new user.
+
+The implicit files provider and domain was removed: see <https://sssd.io/docs/files-provider-deprecation.html>.
+
+Other changes of importance are listed upstream:
+
+* https://sssd.io/release-notes/sssd-2.11.0.html
+* https://sssd.io/release-notes/sssd-2.12.0.html
+
+### Squid
+
+Squid was updated to upstream version 7.2. Coming from version 6, the main new options are:
+
+* Add tls_key_log directive to log TLS master keys.
+
+* Add key-extras format to external ACL helpers to pass transaction details.
+
+* Add doh_query directive to send DNS queries over HTTPS.
+
+* Add cache_peer option tls-client-cert-switch to select client certificates dynamically.
+
+Several bugfixes for crash scenarios are also included in this major release.
+
+Some directives and options were removed/deprecated:
+
+* Removed client_delay_access directive.
+
+* Removed ftp_epsv directive.
+
+* Removed cache_peer option no-netdb-exchange.
+
+* Removed client_persistent_connections and server_persistent_connections directives.
+
+For a list of all changes and fixes, please check the [upstream releases page](https://github.com/squid-cache/squid/releases).
+
 #### SoS (`sosreport`)
 
 SoS was updated to 4.10.2. This upgrade introduces new plugins and also adds new features to existing plugins.
@@ -640,6 +679,8 @@ Updated to 2.4.2. See the [upstream announcement](https://dovecot.org/mailman3/a
 #### Postfix 3.10.6
 
 Postfix was updated to version 3.10.6. See the [upstream announcement](https://www.postfix.org/announcements/postfix-3.10.6.html).
+
+A noteworthy change in the packaging of Postfix is that **by default it is no longer installed in a chroot, and only limited chroot support is available from now on**.
 
 #### `unbound` 1.24.2
 
