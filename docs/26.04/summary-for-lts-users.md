@@ -247,48 +247,18 @@ See [LP: #2101838](https://bugs.launchpad.net/ubuntu/+source/samba/+bug/2101838)
 
 ### Squid
 
-Squid was updated to upstream version 7.2. Coming from version 6, the main new options are:
-
-* Add tls_key_log directive to log TLS master keys.
-
-* Add key-extras format to external ACL helpers to pass transaction details.
-
-* Add doh_query directive to send DNS queries over HTTPS.
-
-* Add cache_peer option tls-client-cert-switch to select client certificates dynamically.
-
-Several bugfixes for crash scenarios are also included in this major release.
-
-Some directives and options were removed/deprecated:
-
-* Removed client_delay_access directive.
-
-* Removed ftp_epsv directive.
-
-* Removed cache_peer option no-netdb-exchange.
-
-* Removed client_persistent_connections and server_persistent_connections directives.
-
-For a list of all changes and fixes, please check the [upstream releases page](https://github.com/squid-cache/squid/releases).
+```{include} /reuse/26.04/squid-7.2.md
+```
 
 ### SSSD
 
-SSSD has been updated to version 2.12.
-
-SSSD now runs under user `sssd` (instead of `root`). Make sure that `sssd` can still access secrets or integrations from its new user.
-
-The implicit files provider and domain was removed: see <https://sssd.io/docs/files-provider-deprecation.html>.
-
-Other changes of importance are listed upstream:
-
-* https://sssd.io/release-notes/sssd-2.11.0.html
-* https://sssd.io/release-notes/sssd-2.12.0.html
+```{include} /reuse/26.04/sssd-2.12.md
+```
 
 #### Colored output with `strace` 6.19
 
-[`strace`](https://strace.io/) now supports colored output (configurable with `--color=...`, `STRACE_COLORS=...` and `NO_COLOR=1`).
-
-![Sample colored output](/images/strace-color.png)
+```{include} /reuse/26.04/strace-6.19.md
+```
 
 ### HAProxy
 
