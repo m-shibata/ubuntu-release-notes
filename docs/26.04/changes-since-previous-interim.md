@@ -506,6 +506,12 @@ The implicit files provider and domain was removed: see <https://sssd.io/docs/fi
 
 Other breaking changes and new features can be seen in the [full upstream changelog](https://www.php.net/ChangeLog-8.php#PHP_8_5).
 
+#### Kerberos removes deprecated algorithms from its default lists
+
+MIT Kerberos no longer includes the `arcfour-hmac-md5` and the `des3-cbc-sha1` algorithms in its default encryption algorithm list (the `openssh` and `krb5` lists). They are weak, deprecated algorithms. Before, `krb5` would include them in its default algorithm lists when users do not specify a list with algorithms to be used.
+
+Note that we did not remove support for those algorithms. Instead we just dropped them from the default list that the client will try in case the user do not specify any algorithms in their configuration file in the `permitted_enctypes` directive in the `libdefaults` section in `/etc/krb5.conf`.
+
 ### Database changes
 
 #### PostgreSQL is no longer available on i386
@@ -632,6 +638,8 @@ Django was updated to LTS version 5.2.9. For more information, see the [Django 5
 #### OpenSSH 10.2
 
 OpenSSH was updated to version 10.2, which is a bugfix release on top of 10.1 present in the Ubuntu Questing 25.10 release.
+
+As per RFC 8732, gss-group14-sha1- and gss-gex-sha1- are considered deprecated algorithms and should not be used. Therefore, we dropped those deprecated algorithms from the Ubuntu GSS-API support patch. This does not mean those algorithms are no longer supported. Instead, they were removed from the default list that the client or the server will try for GSS key exchange in case the user does not specify any algorithms in their configuration file.
 
 #### Dovecot 2.4.2
 
