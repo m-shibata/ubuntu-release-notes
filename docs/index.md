@@ -4,31 +4,94 @@ Release notes for Ubuntu, summarizing new features, bug fixes and backwards-inco
 
 Release notes contain specific upgrade instructions for that particular release. See also the general guidance on how to prepare for, and perform, an upgrade: [Ubuntu Desktop](https://documentation.ubuntu.com/desktop/en/latest/how-to/upgrade-ubuntu-desktop/) or [Ubuntu Server](https://ubuntu.com/server/docs/how-to/software/upgrade-your-release/).
 
-## 26.04 LTS
+:::{toctree}
+:hidden:
+:maxdepth: 2
+:caption: Supported LTS releases
+
+24.04 LTS (Noble Numbat) <24.04/index>
+22.04 LTS (Jammy Jellyfish) <22.04/index>
+:::
+
+:::{toctree}
+:hidden:
+:maxdepth: 2
+:caption: Supported interim releases
+
+25.10 (Questing Quokka) <25.10/index>
+:::
+
+:::{toctree}
+:hidden:
+:maxdepth: 2
+:caption: Currently in development
+
+26.04 LTS (Resolute Raccoon) <26.04/index>
+:::
+
+:::{toctree}
+:hidden:
+:maxdepth: 2
+:caption: Other releases
+
+Future releases <future>
+Older releases <archive>
+:::
+
+## LTS releases
+
+<!--
+Still in development:
+
+### 26.04 LTS (Resolute Raccoon)
 
 * {ref}`ubuntu-26.04-lts-release-notes`
 * {ref}`resolute-raccoon-schedule`
-* [Ubuntu 26.04 LTS roadmap](https://discourse.ubuntu.com/t/ubuntu-26-04-lts-the-roadmap/72740)
+-->
 
-## 25.10
+### 24.04 LTS (Noble Numbat)
 
-* [Questing Quokka release notes](https://discourse.ubuntu.com/t/questing-quokka-release-notes/59220)
-
-## 24.04 LTS
-
-* [24.04.2](https://discourse.ubuntu.com/t/noble-numbat-point-release-changes/47565/3)  
-* [24.04.1](https://discourse.ubuntu.com/t/noble-numbat-point-release-changes/47565#h-24041-1)  
-* [Ubuntu 24.04 LTS (Noble Numbat) release notes](https://discourse.ubuntu.com/t/ubuntu-24-04-lts-noble-numbat-release-notes/39890)
+* {ref}`changes-in-ubuntu-24.04.4`
+* {ref}`changes-in-ubuntu-24.04.3`
+* {ref}`changes-in-ubuntu-24.04.2`
+* {ref}`changes-in-ubuntu-24.04.1`
+* {ref}`ubuntu-24.04-lts-release-notes`
 * {ref}`noble-numbat-schedule`
+
+### 22.04 LTS (Jammy Jellyfish)
+
+* {ref}`changes-in-ubuntu-22.04.5`
+* {ref}`changes-in-ubuntu-22.04.4`
+* {ref}`changes-in-ubuntu-22.04.3`
+* {ref}`changes-in-ubuntu-22.04.2`
+* {ref}`changes-in-ubuntu-22.04.1`
+* {ref}`ubuntu-22.04-lts-release-notes`
+* {ref}`jammy-jellyfish-schedule`
+
+## Interim releases
+
+### 25.10 (Questing Quokka)
+
+* {ref}`ubuntu-25.10-release-notes`
 
 (release-policy-and-schedule)=
 ## Release policy and schedule
 
-Our release cadence nunc elit magna, pulvinar sed egestas ut, porta sed leo. Nam in urna ultricies, lacinia nisl non, dictum risus. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aliquam turpis mauris, pulvinar a enim eget, dignissim feugiat libero. Aenean volutpat sit amet justo sit amet eleifend.
+Ubuntu releases a new version every six months. Releases of Ubuntu get a development codename (‘Questing Quokka’) and are versioned by the year and month of delivery – for example, Ubuntu 25.10 was released in October 2025.
+
+Each version includes the latest features, updates, and security patches during its supported lifecycle.
+
+For details, see [Ubuntu release cycle](https://ubuntu.com/about/release-cycle).
+
+### Interim releases
+
+Ubuntu’s interim releases are designed for users and teams who move fast and need access to the latest kernels, languages, and toolchains. They provide cutting-edge features and hardware support every six months, but with only 9 months of updates. For long-term stability, production environments should use the LTS version, while interim releases suit those prioritizing speed and rapid feature testing.
 
 ### Long-term support (LTS)
 
-LTS releases eleifend augue eros, vel viverra arcu accumsan malesuada. Cras consectetur, orci a porttitor pellentesque, est leo fringilla sapien, eu sagittis urna magna nec ipsum. Quisque iaculis tincidunt felis, a placerat quam. Curabitur non leo ac neque consectetur viverra. Duis mattis consectetur convallis.
+LTS are released every two years and receive 5 years of standard security maintenance.
+
+LTS releases are the go-to choice for users who value stability and extended support. These versions are security maintained for 5 years with CVE patches for packages in the Main repository. They are recommended for production environments, enterprises, and long-term projects.
 
 ### Security vulnerability policy on release day
 
@@ -69,30 +132,3 @@ Your comments, bug reports, patches and suggestions help fix bugs and improve th
 ### Governance and policies
 
 * [Code of conduct](https://ubuntu.com/community/code-of-conduct)
-
-
-:::{toctree}
-:hidden:
-:maxdepth: 2
-:caption: Supported releases
-
-26.04 LTS (Resolute Raccoon) <26.04/index>
-24.04 LTS (Noble Numbat) <24.04/index>
-:::
-
-:::{toctree}
-:hidden:
-:maxdepth: 2
-:caption: Currently in development
-
-26.10 (S* S*) <26.10/schedule>
-:::
-
-:::{toctree}
-:hidden:
-:maxdepth: 2
-:caption: Other releases
-
-Upcoming releases <upcoming>
-Older releases <archive>
-:::

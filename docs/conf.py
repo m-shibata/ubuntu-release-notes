@@ -58,7 +58,7 @@ copyright = "%s CC-BY-SA, %s" % (datetime.date.today().year, author)
 # NOTE: The Open Graph Protocol (OGP) enhances page display in a social graph
 #       and is used by social media platforms; see https://ogp.me/
 
-ogp_site_url = "https://ubuntu-release-notes.readthedocs-hosted.com/"
+ogp_site_url = "https://documentation.ubuntu.com/release-notes/"
 
 
 # Preview name of the documentation website
@@ -128,6 +128,18 @@ html_context = {
 
     # Required for feedback button
     'github_issues': 'enabled',
+
+    # Links for the "Ubuntu docs" dropdown in the site header
+    #  - comment out "your" docs set, duh! ;-)
+    "ubuntu_docs": [
+        # {"title": "Ubuntu release notes", "url": "https://documentation.ubuntu.com/release-notes/"},
+        {"title": "Ubuntu Desktop",        "url": "https://documentation.ubuntu.com/desktop/"},
+        {"title": "Ubuntu Server",         "url": "https://ubuntu.com/server/docs/"},
+        {"title": "Ubuntu on WSL",         "url": "https://documentation.ubuntu.com/wsl/latest/"},
+        {"title": "Ubuntu for developers", "url": "https://documentation.ubuntu.com/ubuntu-for-developers/"},
+        {"title": "Ubuntu project",        "url": "https://documentation.ubuntu.com/project/"},
+        {"title": "Ubuntu Pro",            "url": "https://documentation.ubuntu.com/pro/"},
+    ],
 }
 
 html_extra_path = []
@@ -145,7 +157,7 @@ html_extra_path = []
 # - https://git.launchpad.net/example
 #
 html_theme_options = {
-'source_edit_link': 'https://github.com/ubuntu/ubuntu-release-notes',
+    # 'source_edit_link': 'https://github.com/ubuntu/ubuntu-release-notes',
 }
 
 # Project slug; see https://meta.discourse.org/t/what-is-category-slug/87897
@@ -153,7 +165,7 @@ html_theme_options = {
 # TODO: If your documentation is hosted on https://docs.ubuntu.com/,
 #       uncomment and update as needed.
 
-# slug = ''
+slug = 'release-notes'
 
 #######################
 # Sitemap configuration: https://sphinx-sitemap.readthedocs.io/
@@ -187,7 +199,7 @@ sitemap_excludes = [
 #######################
 
 html_static_path = ["_static"]
-#templates_path = ["_templates"]
+templates_path = [".sphinx/_templates"]
 
 
 #############
@@ -217,7 +229,12 @@ redirects = {
 
 linkcheck_ignore = [
     "http://127.0.0.1:8000",
-    "https://github.com/canonical/ACME/*"
+    "https://github.com/canonical/ACME/*",
+    # The link checker tries to treat the part after # as an anchor and fails.
+    "https://matrix.to/*",
+    # Rate-limited domains that cause delays
+    r"http://www\.gnu\.org/software/.*",
+    r"https://github\.com/.*/blob/.*",
     ]
 
 
@@ -226,8 +243,12 @@ linkcheck_ignore = [
 linkcheck_anchors_ignore_for_url = [r"https://github\.com/.*"]
 
 # give linkcheck multiple tries on failure
-# linkcheck_timeout = 30
-linkcheck_retries = 3
+linkcheck_timeout = 15
+linkcheck_retries = 2
+
+# Number of parallel workers for linkcheck (default is 5)
+# Higher values work well for network I/O-bound tasks
+linkcheck_workers = 20
 
 ########################
 # Configuration extras #
