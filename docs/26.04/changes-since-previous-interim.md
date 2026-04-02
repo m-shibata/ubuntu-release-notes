@@ -815,6 +815,39 @@ Installing `ubuntu-fonts-classic` results in a non-Ubuntu font being displayed (
 
 ### Server issues
 
+#### Apache2 security hardening breaks the `mod-php` JIT
+
+The Apache2 `systemd` service unit now sets the `MemoryDenyWriteExecute=yes` option by default as a security hardening measure. This prevents simultaneously writable and executable memory mappings. However, it breaks PHP's JIT compiler when using the `libapache2-mod-php` module, producing warnings such as the following:
+
+```text
+Warning: preg_match(): Allocation of JIT memory failed, PCRE JIT will be disabled.
+```
+
+We recommend that you switch from `mod-php` to the `php-fpm` service, which isn't affected by the change.
+
+If you want to continue using `mod-php`, override the setting by editing the Apache2 `systemd` unit:
+
+1. Open the editor:
+
+    ```
+    sudo systemctl edit apache2
+    ```
+
+2. Uncomment and edit the following line and save:
+
+    ```ini
+    [Service]
+    MemoryDenyWriteExecute=no
+    ```
+
+3. Restart Apache2:
+
+    ```bash
+    sudo systemctl restart apache2
+    ```
+
+See [LP: #2144455](https://bugs.launchpad.net/ubuntu-release-notes/+bug/2144455) and the [systemd.exec documentation](https://www.freedesktop.org/software/systemd/man/latest/systemd.exec.html#MemoryDenyWriteExecute=) for more information.
+
 #### RabbitMQ
 
 ```{include} /reuse/26.04/rabbitmq-upgrade.txt
