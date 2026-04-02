@@ -301,7 +301,7 @@ Due to upstream policy, support for 32-bit MySQL Server has been removed. Howeve
 :::{versionadded} 25.04
 :::
 
-MySQL Shell was updated from major version 8.0 to 8.4 to coencide with MySQL 8.4. It adds support for MySQL 8.4 servers, and provides additional improvements for interacting with MySQL 8.0 servers. For a list of features, see the [MySQL Shell 8.4 documentation](https://dev.mysql.com/doc/mysql-shell/8.4/en/). Release notes for MySQL Shell 8.4 can be found [here](https://dev.mysql.com/doc/relnotes/mysql-shell/8.4/en/).
+MySQL Shell was updated from major version 8.0 to 8.4 to coincide with MySQL 8.4. It adds support for MySQL 8.4 servers, and provides additional improvements for interacting with MySQL 8.0 servers. For a list of features, see the [MySQL Shell 8.4 documentation](https://dev.mysql.com/doc/mysql-shell/8.4/en/). Release notes for MySQL Shell 8.4 can be found [here](https://dev.mysql.com/doc/relnotes/mysql-shell/8.4/en/).
 
 ### PostgreSQL
 :::{versionadded} 26.04
