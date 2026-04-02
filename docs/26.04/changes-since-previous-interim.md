@@ -13,6 +13,99 @@ Ubuntu 26.04 LTS is currently in development, scheduled to be released in April 
 
 ## New features and improvements
 
+### System features
+
+#### cloud-init v. 26.1
+
+Cloud-init features introduced beyond v. 25.3 in Questing:
+
+* Add support for s390x platform detection on LXD
+* Add support for Tilaa cloud platform detection.
+* Fix LXD Snap installs on Plucky and newer
+* Scaleway cloud to support exposing regions and availability zones, drop private IP handling
+* Add network v1 support for bonds, bridges and VLANs
+* Allow `network-config` to express `allow_accept_ra` for bonds, bridges and VLANsOpenStack `network_data.json` support of bond names
+
+See [cloud-init’s release notes for more details](https://github.com/canonical/cloud-init/releases).
+
+#### fwupd
+
+Systems running TPM/FDE will now prompt for the recovery key before firmware updates that may require the recovery key upon reboot.
+
+#### Linux kernel 7.0 🐧
+
+* `cgroupfs` is now mounted with `nsdelegate,memory_recursiveprot,memory_hugetlb_accounting`
+
+#### Netplan v1.1.2 🌐
+
+...
+
+#### Package Management: APT 3.0
+
+...
+
+#### sudo-rs
+
+Password feedback is now enabled by default in order to improve the user experience of `sudo`.
+If the previous behavior is preferred, password feedback can be disabled using the following steps:
+
+1. Edit sudoers using `sudo visudo` in the terminal
+2. Add the option `Defaults !pwfeedback` to the configuration file
+
+#### systemd 259.5
+
+The `systemd` service manager has been updated to version 259. For a complete list of changes, see the [changelog](https://github.com/systemd/systemd/releases/tag/v259).
+
+Also, refer to the removed and deprecated functionality:
+
+* {ref}`cgroup-v1-removed`
+* {ref}`system-v-scripts-deprecated`
+
+#### TPM/FDE
+
+...
+
+#### Ubuntu Insights integration with the release upgrader
+
+When Ubuntu Insights is available and configured, the release upgrader will now use Ubuntu Insights at the end of a release upgrade to generate a report based on the existing consent state. Note, this change does not prevent the Ubuntu Report-based collection that may be triggered by a release upgrade.
+
+This change only affects Desktop and WSL since presently, these are the only platforms that include Ubuntu Insights.
+
+(ibm-z15-level)=
+#### IBM Z and LinuxONE (s390x)
+
+The following provides an overview of selected and significant s390x-specific enhancements and improvements that landed in Ubuntu Server 26.04 for IBM Z and LinuxONE.
+
+On the IBM Z (s390s) architecture, the architectural level set (ALS) was raised to build for IBM Z generation z15 (LinuxONE Emperor III) with the `march=z15` and `mtune=z16` compiler options ([LP: #2126577](https://launchpad.net/bugs/2126577)). This brings performance improvements on the later generations
+
+{ref}`ibm-z14-support-removed`.
+
+With every new Ubuntu Server release the `s390-tools` package was gradually upgraded to its latest available release v2.41 ([LP: #2141945](https://launchpad.net/bugs/2141945)), that now:
+
+* adds a `udev` rule to set `none` as default I/O scheduler for `virtio-blk` devices ([LP: #2138886](https://launchpad.net/bugs/2138886))
+* adds a `udev` rule to disable the `rotational` attribute for `virtio-blk` (especially important for swapping or paging) ([LP: #2138887](https://launchpad.net/bugs/2138887))
+* introduces the new `pvverify` tool, that allows to verify host key documents in the context of Secure Execution (SE) ([LP: #2138888](https://launchpad.net/bugs/2138888))
+* and the `pvimg info` command was enhanced to display additional SE image information ([LP: #2141952](https://launchpad.net/bugs/2141952))
+
+KVM enhancements arrived by adding zVDT Parallel Sysplex support ([LP: #2142654](https://launchpad.net/bugs/2142654)) and by rewriting `gmap` using MMU notifiers ([LP: #2142682](https://launchpad.net/bugs/2142682)).
+
+In the area of cryptography the following updates and improvements happened:
+
+* `zkey` support for `dm-integrity` with HMAC was added to the `s390-tools` package ([LP: #2096889](https://launchpad.net/bugs/2096889)) and to the kernel ([LP: #2138650](https://launchpad.net/bugs/2138650))
+* PHMAC was added to `cryptsetup` ([LP: #2138512](https://launchpad.net/bugs/2138512)), and required also `systemd` ([LP: #2138511](https://launchpad.net/bugs/2138511)) updates.
+* The default use of clear keys by PAES and PHMAC in-kernel crypt modules was disabled ([LP: #2139610](https://launchpad.net/bugs/2139610)), but they can still be explicitly allowed with a module parameter.
+* An overwrite function was added to the `zcrypt` driver, allowing the configuring of the device driver on a per APQN basis ([LP: #2138854](https://launchpad.net/bugs/2138854))
+* The upgrade to `opecryptoki` v3.26 ([LP: #2135123](https://launchpad.net/bugs/2135123)) added ML-KEM and ML-DSA support for `ep11` token ([LP: #2138514](https://launchpad.net/bugs/2138514)) and `cca` token ([LP: #2138515](https://launchpad.net/bugs/2138515)) and BLS support for `ep11` token ([LP: #2138804](https://launchpad.net/bugs/2138804)).
+* The upgrade of `libzpc` to v1.4.1 ([LP: #2136312](https://launchpad.net/bugs/2136312)) removed a protected key verification pattern mismatch, now allowing to support Live Guest Relocation ([LP: #2140342](https://launchpad.net/bugs/2140342))
+
+The kernel also received selected improvements, like support for 128 KB tape block sizes ([LP: #2141569](https://launchpad.net/bugs/2141569)) and support for dynamic (de)configuration of hot-pluggable memory ([LP: #2142862](https://launchpad.net/bugs/2142862)).
+
+Finally several packages were updated to their latest upstream version to pick up s390x-specific upstream fixes and improvements. For example:
+
+* `valgrind`, for full z17 support ([LP: #2139096](https://launchpad.net/bugs/2139096))
+* `libdfp`, mainly fixes ([LP: #2122325](https://launchpad.net/bugs/2122325))
+* `smc-tools` for fixes and additional statistics output ([LP: #2142098](https://launchpad.net/bugs/2142098))
+
 ### Desktop features
 
 #### GNOME 50
@@ -122,19 +215,17 @@ For more information see the [4.10.1](https://github.com/sosreport/sos/releases/
 ```{include} /reuse/26.04/strace-6.19.txt
 ```
 
-### Container features
-
-#### Container stacks
+#### Container stack
 
 For the `containerd` and `runc` packages, we established a pattern to either keep the regular updates to the latest version or to opt for slower, more stable updates throughout the time the release is active. For more please read [Ubuntu Server Gazette - Issue 8 - Containers: Steady paths for agile stacks](https://discourse.ubuntu.com/t/ubuntu-server-gazette-issue-8-containers-steady-paths-for-agile-stacks/68680).
 
-#### `containerd` 2.2.1
+#### containerd 2.2.2
 
-The `containerd` packages (`src:containerd-app`, `src:containerd-stable`) were updated to version 2.2.1. Version 2 includes the stabilization of new features added in the last 1.x release as well as the removal of features which were deprecated in 1.x, meaning you should expect breaking changes here.
+The `containerd` packages (`src:containerd-app`, `src:containerd-stable`) were updated to version 2.2.2 Version 2 includes the stabilization of new features added in the last 1.x release as well as the removal of features which were deprecated in 1.x, meaning you should expect breaking changes here.
 
 For further details on such changes, please refer to the `containerd` 2.0 [upstream release notes](https://github.com/containerd/containerd/blob/main/docs/containerd-2.0.md) and check the notes for [individual point releases](https://github.com/containerd/containerd/releases).
 
-#### `runc` 1.4.0
+#### runc 1.4.0
 
 The `runc` package (`src:runc-app`) was updated to version 1.4.0. The most noteworthy change here is that the handling of `pids.limit` has been updated to match the newer guidance from the OCI runtime specification. In particular, now a maximum limit value of 0 will be treated as an actual limit (it will be treated the same as a limit value of 1). We only expect users that explicitly set `pids.limit` to 0 will see a behavior change.
 
@@ -150,7 +241,11 @@ The `containerd` image store is now the default for **fresh installs**. This doe
 
 For a comprehensive list of changes, please check the [upstream release notes](https://docs.docker.com/engine/release-notes/29/).
 
-### Virtualization features
+#### Virtualization stack
+
+The virtualization stack got various updates and to provide more flexibility an additional
+hardware enablement option was added that will in addition allow to switch to the
+virtualization stack of the following interim releases while otherwise staying on the LTS.
 
 #### libvirt
 
@@ -277,11 +372,10 @@ Further details on new features and bug fixes are available in the upstream chan
 
 * [edk2-stable202511](https://github.com/tianocore/edk2/releases/tag/edk2-stable202511)
 
-### Database features
-
 #### DocumentDB
 
-DocumentDB is now available in Ubuntu, starting with version 0.108-0. It is a powerful, scalable, MongoDB compatible open-source document database built for modern applications, built on PostgreSQL. For more information see [documentdb.io](https://documentdb.io/).
+```{include} /reuse/26.04/documentdb-0.108-0-features.txt
+```
 
 #### MariaDB is fully supported
 
@@ -308,19 +402,15 @@ Percona Toolkit was updated to the latest version, 3.7.1, and now includes addit
 
 #### PostgreSQL
 
-PostgreSQL was updated to version 18. This new version improves performance for workloads of all sizes through a new I/O subsystem that has demonstrated up to 3× performance improvements when reading from storage, and also increases the number of queries that can use indexes. This release makes major-version upgrades less disruptive, accelerating upgrade times and reducing the time required to reach expected performance after an upgrade completes. Developers also benefit from PostgreSQL 18 features, including virtual generated columns that compute values at query time, and the database-friendly `uuidv7()` function that provides better indexing and read performance for UUIDs. PostgreSQL 18 makes it easier to integrate with single-sign on (SSO) systems with support for OAuth 2.0 authentication.
-
-For further information, check the [upstream release announcement](https://www.postgresql.org/about/news/postgresql-18-released-3142/) and the [upstream release notes](https://www.postgresql.org/docs/18/release-18.html).
+```{include} /reuse/26.04/postgresql-18-features.txt
+```
 
 #### Valkey
 
-Valkey was updated to version 9.0, starting with 9.0.3. This includes various features and improvements beyond 8.x, such as atomic slot migrations and hash field expiration.
+```{include} /reuse/26.04/valkey-9.0-features.txt
+```
 
-For more information on the new version, see the [Valkey 9 blog post](https://valkey.io/blog/introducing-valkey-9/). Release notes are available on the [Valkey project GitHub](https://github.com/valkey-io/valkey/releases).
-
-### High availability and clustering features
-
-#### `fence-agents`
+#### fence-agents
 
 `fence-agents` is updated to version 4.17.0. This version includes a few new agents, like `aws_vpc_net` and `hetzner_cloud`, and enhancements to the existing ones.
 
@@ -328,7 +418,7 @@ In terms of security, the `azure_arm` agent replaced the dependency on `msrestaz
 
 For a list of all changes, please refer to the [upstream changes](https://github.com/ClusterLabs/fence-agents/compare/v4.16.0...v4.17.0).
 
-#### `resource-agents`
+#### resource-agents
 
 `resource-agents` is updated to version 4.17.0. This version includes several new agents, like `aws-datasync-*` and `tickle-*`, and enhancements to the existing ones.
 
@@ -337,39 +427,6 @@ For a list of all changes, please refer to the [upstream release notes](https://
 #### HAProxy
 
 HAProxy was updated to the latest upstream LTS release, 3.2, which introduces performance and efficiency improvements, faster and more reliable QUIC protocol support, and more. For further details on this new release, please check the HAProxy 3.2 [upstream announcement](https://www.mail-archive.com/haproxy@formilux.org/msg45917.html).
-
-### Development features
-
-#### Toolchain upgrades 🛠️
-
-* `glibc` 2.42 now ships non-UTF8 encodings as `libc-gconv-modules-extra`.
-* LLVM 21 is the default LLVM toolchain.
-* Rust 1.93.1 is the default Rust toolchain.
-
-#### OpenJDK
-
-OpenJDK 25 package is the default and is TCK (Technology Compatibility Kit) certified on AMD64, ARM64, S390X, PPC64EL. The Java TCK is the most comprehensive test suite that covers all aspects of Java SE specification including language features, libraries and APIs. This guarantees interoperability and conformance to standard.
-
-#### .NET
-
-...
-
-### Enterprise features
-
-### Cloud features
-
-#### cloud-init v. 26.1
-
-Cloud-init features introduced beyond v. 25.3 in Questing:
-
-* Add support for s390x platform detection on LXD
-* Add support for Tilaa cloud platform detection.
-* Fix LXD Snap installs on Plucky and newer
-* Scaleway cloud to support exposing regions and availability zones, drop private IP handling
-* Add network v1 support for bonds, bridges and VLANs
-* Allow `network-config` to express `allow_accept_ra` for bonds, bridges and VLANsOpenStack `network_data.json` support of bond names
-
-See [cloud-init’s release notes for more details](https://github.com/canonical/cloud-init/releases).
 
 #### Microsoft Azure
 
@@ -420,91 +477,57 @@ Horizon (Dashboard)
 
 For the full list of [upstream release highlights](https://releases.openstack.org/gazpacho/highlights.html), see the OpenStack 2026.1 Gazpacho documentation.
 
-### Security features
+### Development features
 
-#### TPM/FDE
+#### Toolchain upgrades 🛠️
 
-...
+* `glibc` 2.42 now ships non-UTF8 encodings as `libc-gconv-modules-extra`.
+* LLVM 21 is the default LLVM toolchain.
+* Rust 1.93.1 is the default Rust toolchain.
 
-### Hardware support features
+#### OpenJDK
 
-(ibm-z15-level)=
-#### IBM Z and LinuxONE (s390x)
+OpenJDK 25 package is the default and is TCK (Technology Compatibility Kit) certified on AMD64, ARM64, S390X, PPC64EL. The Java TCK is the most comprehensive test suite that covers all aspects of Java SE specification including language features, libraries and APIs. This guarantees interoperability and conformance to standard.
 
-The following provides an overview of selected and significant s390x-specific enhancements and improvements that landed in Ubuntu Server 26.04 for IBM Z and LinuxONE.
-
-On the IBM Z (s390s) architecture, the architectural level set (ALS) was raised to build for IBM Z generation z15 (LinuxONE Emperor III) with the `march=z15` and `mtune=z16` compiler options ([LP: #2126577](https://launchpad.net/bugs/2126577)). This brings performance improvements on the later generations
-
-{ref}`ibm-z14-support-removed`.
-
-With every new Ubuntu Server release the `s390-tools` package was gradually upgraded to its latest available release v2.41 ([LP: #2141945](https://launchpad.net/bugs/2141945)), that now:
-
-* adds a `udev` rule to set `none` as default I/O scheduler for `virtio-blk` devices ([LP: #2138886](https://launchpad.net/bugs/2138886))
-* adds a `udev` rule to disable the `rotational` attribute for `virtio-blk` (especially important for swapping or paging) ([LP: #2138887](https://launchpad.net/bugs/2138887))
-* introduces the new `pvverify` tool, that allows to verify host key documents in the context of Secure Execution (SE) ([LP: #2138888](https://launchpad.net/bugs/2138888))
-* and the `pvimg info` command was enhanced to display additional SE image information ([LP: #2141952](https://launchpad.net/bugs/2141952))
-
-KVM enhancements arrived by adding zVDT Parallel Sysplex support ([LP: #2142654](https://launchpad.net/bugs/2142654)) and by rewriting `gmap` using MMU notifiers ([LP: #2142682](https://launchpad.net/bugs/2142682)).
-
-In the area of cryptography the following updates and improvements happened:
-
-* `zkey` support for `dm-integrity` with HMAC was added to the `s390-tools` package ([LP: #2096889](https://launchpad.net/bugs/2096889)) and to the kernel ([LP: #2138650](https://launchpad.net/bugs/2138650))
-* PHMAC was added to `cryptsetup` ([LP: #2138512](https://launchpad.net/bugs/2138512)), and required also `systemd` ([LP: #2138511](https://launchpad.net/bugs/2138511)) updates.
-* The default use of clear keys by PAES and PHMAC in-kernel crypt modules was disabled ([LP: #2139610](https://launchpad.net/bugs/2139610)), but they can still be explicitly allowed with a module parameter.
-* An overwrite function was added to the `zcrypt` driver, allowing the configuring of the device driver on a per APQN basis ([LP: #2138854](https://launchpad.net/bugs/2138854))
-* The upgrade to `opecryptoki` v3.26 ([LP: #2135123](https://launchpad.net/bugs/2135123)) added ML-KEM and ML-DSA support for `ep11` token ([LP: #2138514](https://launchpad.net/bugs/2138514)) and `cca` token ([LP: #2138515](https://launchpad.net/bugs/2138515)) and BLS support for `ep11` token ([LP: #2138804](https://launchpad.net/bugs/2138804)).
-* The upgrade of `libzpc` to v1.4.1 ([LP: #2136312](https://launchpad.net/bugs/2136312)) removed a protected key verification pattern mismatch, now allowing to support Live Guest Relocation ([LP: #2140342](https://launchpad.net/bugs/2140342))
-
-The kernel also received selected improvements, like support for 128 KB tape block sizes ([LP: #2141569](https://launchpad.net/bugs/2141569)) and support for dynamic (de)configuration of hot-pluggable memory ([LP: #2142862](https://launchpad.net/bugs/2142862)).
-
-Finally several packages were updated to their latest upstream version to pick up s390x-specific upstream fixes and improvements. For example:
-
-* `valgrind`, for full z17 support ([LP: #2139096](https://launchpad.net/bugs/2139096))
-* `libdfp`, mainly fixes ([LP: #2122325](https://launchpad.net/bugs/2122325))
-* `smc-tools` for fixes and additional statistics output ([LP: #2142098](https://launchpad.net/bugs/2142098))
-
-### Common features
-
-#### Linux kernel 7.0 🐧
-
-* `cgroupfs` is now mounted with `nsdelegate,memory_recursiveprot,memory_hugetlb_accounting`
-
-#### systemd 259.5
-
-The `systemd` service manager has been updated to version 259. For a complete list of changes, see the [changelog](https://github.com/systemd/systemd/releases/tag/v259).
-
-Also, refer to the removed and deprecated functionality:
-
-* {ref}`cgroup-v1-removed`
-* {ref}`system-v-scripts-deprecated`
-
-#### Netplan v1.1.2 🌐
+#### .NET
 
 ...
 
-#### `fwupd`
 
-Systems running TPM/FDE will now prompt for the recovery key before firmware updates that may require the recovery key upon reboot.
-
-#### `sudo-rs`
-
-Password feedback is now enabled by default in order to improve the user experience of `sudo`.
-If the previous behavior is preferred, password feedback can be disabled using the following steps:
-
-1. Edit sudoers using `sudo visudo` in the terminal
-2. Add the option `Defaults !pwfeedback` to the configuration file
-
-#### Ubuntu Insights integration with the release upgrader
-
-When Ubuntu Insights is available and configured, the release upgrader will now use Ubuntu Insights at the end of a release upgrade to generate a report based on the existing consent state. Note, this change does not prevent the Ubuntu Report-based collection that may be triggered by a release upgrade.
-
-This change only affects Desktop and WSL since presently, these are the only platforms that include Ubuntu Insights.
-
-#### Package Management: APT 3.0
-
-...
 
 ## Backwards-incompatible changes
+
+### System changes
+
+(cgroup-v1-removed)=
+#### `cgroup` v1 support has been removed
+
+`systemd` version 259 no longer supports `cgroup` v1 (`legacy` and `hybrid`) hierarchies. As a result:
+
+  * Ubuntu installations running `cgroup` v1 will not be allowed to upgrade to Ubuntu 26.04 LTS.
+  * Ubuntu 26.04 LTS container workloads will not run on a host booted with `cgroup` v1.
+  * Ubuntu 26.04 LTS hosts do not support container workloads that require `cgroup` v1: for example, Ubuntu earlier than 18.04 LTS.
+
+This change was made in `systemd` version 258. See the [changelog](https://github.com/systemd/systemd/releases/tag/v258) for more information.
+
+#### Removable media are mounted under `/run/media`
+
+In previous Ubuntu releases, removable media were mounted under the `/media` directory. Starting with Ubuntu 26.04 LTS, `/run/media` is now the mount directory instead. This has several benefits:
+
+- Better support for read-only root file systems
+- Better alignment with other distributions and upstream defaults
+- Not requiring special cleanup routines because `/run` is hosted on a virtual memory file system (`tmpfs`)
+
+If you rely on the specific directory path for media access, check that your setup still works. For example, test your existing scripts.
+
+[LP#2130110](https://bugs.launchpad.net/ubuntu/+source/udisks2/+bug/2130110)
+
+(ibm-z14-support-removed)=
+#### Ubuntu no longer supports IBM Z generations z14 or older
+
+On the IBM Z (s390s) architecture, the architectural level set (ALS) was raised to build for IBM Z generation z15 ([LP: #2126577](https://launchpad.net/bugs/2126577)). As a result, Ubuntu 26.04 LTS no longer works on IBM Z generations z14 (LinuxONE II) or older. You can't install Ubuntu 26.04 LTS on this hardware or upgrade to it. The `ubuntu-release-upgrader` prevents you from performing the upgrade.
+
+IBM Z generation z14 (LinuxONE II) is still supported by Ubuntu Server 24.04 LTS for up to 15 years in total.
 
 ### Desktop changes
 
@@ -555,15 +578,11 @@ MIT Kerberos no longer includes the `arcfour-hmac-md5` and the `des3-cbc-sha1` a
 
 Note that we did not remove support for those algorithms. Instead we just dropped them from the default list that the client will try in case the user do not specify any algorithms in their configuration file in the `permitted_enctypes` directive in the `libdefaults` section in `/etc/krb5.conf`.
 
-### Database changes
-
 #### PostgreSQL is no longer available on i386
 
 PostgreSQL 18 in Ubuntu 26.04 LTS no longer builds for the i386 architecture. Therefore, it no longer produces the `libpq-dev` and `libpq5` binary packages for that architecture. This means that any package depending on those libraries will also not be available in i386.
 
 See [LP: #2142320](https://bugs.launchpad.net/ubuntu-release-notes/+bug/2142320) for more information.
-
-### High availability and clustering changes
 
 #### Replaced agents in `resource-agents`
 
@@ -575,8 +594,6 @@ The `oracledb` and `zabbixagent` agents were replaced by the `oracle` and `zabbi
 ### Enterprise changes
 -->
 
-### Cloud changes
-
 #### Removed features in OpenStack
 
 The Manila V1 API and the Manila shell utility have been removed.
@@ -587,41 +604,16 @@ For details, see the Manila [release highlights](https://releases.openstack.org/
 ### Security changes
 -->
 
-### Hardware support changes
-
-(ibm-z14-support-removed)=
-#### Ubuntu no longer supports IBM Z generations z14 or older
-
-On the IBM Z (s390s) architecture, the architectural level set (ALS) was raised to build for IBM Z generation z15 ([LP: #2126577](https://launchpad.net/bugs/2126577)). As a result, Ubuntu 26.04 LTS no longer works on IBM Z generations z14 (LinuxONE II) or older. You can't install Ubuntu 26.04 LTS on this hardware or upgrade to it. The `ubuntu-release-upgrader` prevents you from performing the upgrade.
-
-IBM Z generation z14 (LinuxONE II) is still supported by Ubuntu Server 24.04 LTS for up to 15 years in total.
-
-### Common changes
-
-(cgroup-v1-removed)=
-#### `cgroup` v1 support has been removed
-
-`systemd` version 259 no longer supports `cgroup` v1 (`legacy` and `hybrid`) hierarchies. As a result:
-
-  * Ubuntu installations running `cgroup` v1 will not be allowed to upgrade to Ubuntu 26.04 LTS.
-  * Ubuntu 26.04 LTS container workloads will not run on a host booted with `cgroup` v1.
-  * Ubuntu 26.04 LTS hosts do not support container workloads that require `cgroup` v1: for example, Ubuntu earlier than 18.04 LTS.
-
-This change was made in `systemd` version 258. See the [changelog](https://github.com/systemd/systemd/releases/tag/v258) for more information.
-
-#### Removable media are mounted under `/run/media`
-
-In previous Ubuntu releases, removable media were mounted under the `/media` directory. Starting with Ubuntu 26.04 LTS, `/run/media` is now the mount directory instead. This has several benefits:
-
-- Better support for read-only root file systems
-- Better alignment with other distributions and upstream defaults
-- Not requiring special cleanup routines because `/run` is hosted on a virtual memory file system (`tmpfs`)
-
-If you rely on the specific directory path for media access, check that your setup still works. For example, test your existing scripts.
-
-[LP#2130110](https://bugs.launchpad.net/ubuntu/+source/udisks2/+bug/2130110)
-
 ## Deprecated features
+
+### System deprecations
+
+(system-v-scripts-deprecated)=
+#### Legacy System V service scripts are deprecated
+
+Ubuntu 26.04 LTS is the last release that supports System V service scripts compatibility in `systemd`. Migrate your legacy System V scripts to native `systemd` unit files.
+
+`systemd` version 260 [has already dropped support](https://github.com/systemd/systemd/releases/tag/v260), so this change will take effect in Ubuntu 26.10.
 
 ### Desktop deprecations
 
@@ -648,15 +640,6 @@ Other breaking changes and new features can be seen in the [full upstream change
 
 ### Hardware support deprecations
 -->
-
-### Common deprecations
-
-(system-v-scripts-deprecated)=
-#### Legacy System V service scripts are deprecated
-
-Ubuntu 26.04 LTS is the last release that supports System V service scripts compatibility in `systemd`. Migrate your legacy System V scripts to native `systemd` unit files.
-
-`systemd` version 260 [has already dropped support](https://github.com/systemd/systemd/releases/tag/v260), so this change will take effect in Ubuntu 26.10.
 
 ## Bug fixes
 
@@ -717,112 +700,7 @@ Update to version 1.24.2. See the [upstream changelog](https://github.com/NLnetL
 
 As is to be expected with any release, there are some significant known bugs that users may encounter with this release of Ubuntu. The ones we know about at this point (and some of the workarounds) are documented here, so you don’t need to spend time reporting these bugs again:
 
-### Desktop issues
-
-#### Localization
-
-The Live Session of the new Ubuntu Desktop installer is not localized. It is still possible to perform a non-English installation using the new installer, but internet access at install time is required to download the language packs. ([LP: #2013329](https://bugs.launchpad.net/ubuntu-release-notes/+bug/2013329))
-
-#### Screen reader support
-
-Screen reader support is present with the new desktop installer, but is incomplete ([LP: #2061015](https://launchpad.net/bugs/2061015), [LP: #2061018](https://launchpad.net/bugs/2061018), [LP: #2036962](https://launchpad.net/bugs/2036962), [LP: #2061021](https://launchpad.net/bugs/2061021))
-
-#### OEM installs
-
-OEM installs are not supported yet. ([LP: #2048473](https://launchpad.net/bugs/2048473))
-
-#### Virtualized GTK 4 apps
-
-GTK 4 apps (including the desktop wallpaper) do not display correctly with VirtualBox or VMWare with 3D Acceleration ([LP: #2061118](https://launchpad.net/bugs/2061118)).
-
-#### Incompatibility between TPM-backed Full Disk Encryption and Absolute
-
-TPM-backed Full Disk Encryption (FDE) has been introduced to enhance data security. However, it’s important to note that this feature is incompatible with Absolute (formerly Computrace) security software. If Absolute is enabled on your system, the machine will not boot post-installation when TPM-backed FDE is also enabled. Therefore, disabling Absolute from the BIOS is recommended to avoid booting issues.
-
-#### Hardware-Specific Kernel Module Requirements for TPM-backed Full Disk Encryption
-
-TPM-backed Full Disk Encryption (FDE) requires a specific kernel snap which may not include certain kernel modules necessary for some hardware functionalities. A notable example is the `vmd` module required for NVMe RAID configurations. In scenarios where such specific kernel modules are indispensable, the hardware feature may need to be disabled in the BIOS (such as RAID) to ensure the continued availability of the affected hardware post-installation. If disabling in the BIOS is not an option, the related hardware will not be available post-installation with TPM-backed FDE enabled.
-
-#### Full-disk encryption
-
-See [FDE specific bug reports](https://bugs.launchpad.net/bugs/+bugs?field.searchtext=&orderby=-importance&field.status%3Alist=NEW&field.status%3Alist=CONFIRMED&field.status%3Alist=TRIAGED&field.status%3Alist=INPROGRESS&field.status%3Alist=FIXCOMMITTED&field.status%3Alist=INCOMPLETE_WITH_RESPONSE&field.status%3Alist=INCOMPLETE_WITHOUT_RESPONSE&assignee_option=any&field.assignee=&field.bug_reporter=&field.bug_commenter=&field.subscriber=&field.tag=fde&field.tags_combinator=ANY&field.status_upstream-empty-marker=1&field.has_cve.used=&field.omit_dupes.used=&field.omit_dupes=on&field.affects_me.used=&field.has_patch.used=&field.has_branches.used=&field.has_branches=on&field.has_no_branches.used=&field.has_no_branches=on&field.has_blueprints.used=&field.has_blueprints=on&field.has_no_blueprints.used=&field.has_no_blueprints=on&search=Search).
-
-#### Resuming from suspend on Nvidia
-
-Resuming from suspend on Nvidia desktops (where Nvidia is the primary GPU so generally not laptops)  will exhibit visual corruption and freezes using the default Wayland session  ([LP#1876632](https://bugs.launchpad.net/bugs/1876632)). If you need suspend/resume support then the simplest solution is to select ‘Ubuntu on Xorg’ at the login screen.
-
-#### Classic fonts
-
-Installing `ubuntu-fonts-classic` results in a non-Ubuntu font being displayed ([LP#2083683](https://bugs.launchpad.net/bugs/2083683)). To resolve this, install `gnome-tweaks` and set ‘Interface Text’ to ‘Ubuntu’.
-
-### Server issues
-
-#### rabbitmq-server
-
-RabbitMQ is not directly upgradable due to feature flags. To mitigate this, some manual steps are needed. For more information please read <https://discourse.ubuntu.com/t/ubuntu-server-gazette-issue-12-upgrading-rabbitmq-across-ubuntu-releases/77271>.
-
-#### Bacula
-
-Moved from our `main` repository to `universe`. All relevant Ubuntu changes are upstream now, so we directly sync this from Debian.
-
-<!--
-#### Openstack
-
-Currently, Nova Compute is non-functional because of a python3.13 incompatiblity ([LP:#2103413](https://bugs.launchpad.net/ubuntu/+source/nova/+bug/2103413)).
-The Openstack team and Upstream work on it and it will be resolved via an SRU later.
-
-The Ubuntu Cloud Archive is not affected by this bug.
--->
-
-#### Installer
-
-On systems booting via U-Boot, U-Boot should be updated to the current Plucky version before installation as subiquity does not run flash-kernel and grub-update during the installation. So for first boot the device-tree from U-Boot will be used.
-
-* In some situations, it is acceptable to proceed with an offline installation when the mirror is inaccessible. In this scenario, it is advised to use:
-
-    ```yaml
-    apt:
-      fallback: offline-install
-    ```
-
-* Network interfaces left unconfigured at install time are assumed to be configured via dhcp4. If this doesn’t happen (for example, because the interface is physically not connected) the boot process will block and wait for a few minutes ([LP: #2063331](https://bugs.launchpad.net/subiquity/+bug/2063331)). This can be fixed by removing the extra interfaces from `/etc/netplan/50-cloud-init.conf` or by marking them as `optional: true`. Cloud-init is disabled on systems installed from ISO images, so settings will persist.
-
-<!--
-#### samba apparmor profile
-
-Due to [bug LP: #2063079](https://bugs.launchpad.net/ubuntu/+source/samba/+bug/2063079), the samba `smbd.service` unit file is no longer calling out to the helper script to dynamically create apparmor profile snippets according to the existing shares.
-
-By default, the `smbd` service from samba is not confined. To be affected by this bug, users have to:
-
-* install the optional `apparmor-profiles` package
-* switch the `smbd` profile confinement from `complain` to `enforce`
-
-Therefore, only users who have taken those steps and upgrade to Noble, will be affected by this bug. An SRU to fix it will be done shortly after release.
--->
-
-<!--
-#### Docker
-
-There is an AppArmor related bug where containers cannot be promptly stopped due to the recently added AppArmor profile for `runc`. The containers are always killed with `SIGKILL` due to the denials when trying to receive a signal. More details about this bug can be found [here](https://bugs.launchpad.net/ubuntu/+source/docker.io/+bug/2063099), and a workaround is described [here](https://bugs.launchpad.net/ubuntu/+source/docker.io/+bug/2063099/comments/4).
--->
-
-<!--
-### Development issues
-
-### Enterprise issues
--->
-
-### Cloud issues
-
-#### Microsoft Azure
-
-The current version of `walinuxagent` relies on `python3-legacycrypt` for password changing functionality but it cannot be made a dependency due to a component mismatch ([LP: #2106484](https://launchpad.net/bugs/2106484)).
-
-<!--
-### Security issues
--->
-
-### Hardware support issues
+### System issues
 
 #### Hardware requiring `nomodeset`
 
@@ -871,8 +749,6 @@ PMDK sees some hardware-specific failures in its test suite, which may make the 
 
 * On server images, re-authentication to WiFi APs when regulatory domain is set result in `dmesg` spam to the console ([LP: #2063365](https://launchpad.net/bugs/2063365))
 
-### Common issues
-
 #### TPM/FDE
 
 TPM/FDE installs seem to fail to boot after the installation is complete ([LP: #2104316](https://bugs.launchpad.net/snap-pc/+bug/2104316)). This is an issue with the *beta* image, and it is projected to be fixed by the Plucky release.
@@ -897,6 +773,111 @@ A bug prevents the I/O scheduler from being reset to “none” ([LP: #2083845](
 
 Support for FAN networking has been dropped in the 6.11 release kernel. It will be re-introduced in the next 6.11 kernel update shortly.
 
+
+
+### Desktop issues
+
+#### Localization
+
+The Live Session of the new Ubuntu Desktop installer is not localized. It is still possible to perform a non-English installation using the new installer, but internet access at install time is required to download the language packs. ([LP: #2013329](https://bugs.launchpad.net/ubuntu-release-notes/+bug/2013329))
+
+#### Screen reader support
+
+Screen reader support is present with the new desktop installer, but is incomplete ([LP: #2061015](https://launchpad.net/bugs/2061015), [LP: #2061018](https://launchpad.net/bugs/2061018), [LP: #2036962](https://launchpad.net/bugs/2036962), [LP: #2061021](https://launchpad.net/bugs/2061021))
+
+#### OEM installs
+
+OEM installs are not supported yet. ([LP: #2048473](https://launchpad.net/bugs/2048473))
+
+#### Virtualized GTK 4 apps
+
+GTK 4 apps (including the desktop wallpaper) do not display correctly with VirtualBox or VMWare with 3D Acceleration ([LP: #2061118](https://launchpad.net/bugs/2061118)).
+
+#### Incompatibility between TPM-backed Full Disk Encryption and Absolute
+
+TPM-backed Full Disk Encryption (FDE) has been introduced to enhance data security. However, it’s important to note that this feature is incompatible with Absolute (formerly Computrace) security software. If Absolute is enabled on your system, the machine will not boot post-installation when TPM-backed FDE is also enabled. Therefore, disabling Absolute from the BIOS is recommended to avoid booting issues.
+
+#### Hardware-Specific Kernel Module Requirements for TPM-backed Full Disk Encryption
+
+TPM-backed Full Disk Encryption (FDE) requires a specific kernel snap which may not include certain kernel modules necessary for some hardware functionalities. A notable example is the `vmd` module required for NVMe RAID configurations. In scenarios where such specific kernel modules are indispensable, the hardware feature may need to be disabled in the BIOS (such as RAID) to ensure the continued availability of the affected hardware post-installation. If disabling in the BIOS is not an option, the related hardware will not be available post-installation with TPM-backed FDE enabled.
+
+#### Full-disk encryption
+
+See [FDE specific bug reports](https://bugs.launchpad.net/bugs/+bugs?field.searchtext=&orderby=-importance&field.status%3Alist=NEW&field.status%3Alist=CONFIRMED&field.status%3Alist=TRIAGED&field.status%3Alist=INPROGRESS&field.status%3Alist=FIXCOMMITTED&field.status%3Alist=INCOMPLETE_WITH_RESPONSE&field.status%3Alist=INCOMPLETE_WITHOUT_RESPONSE&assignee_option=any&field.assignee=&field.bug_reporter=&field.bug_commenter=&field.subscriber=&field.tag=fde&field.tags_combinator=ANY&field.status_upstream-empty-marker=1&field.has_cve.used=&field.omit_dupes.used=&field.omit_dupes=on&field.affects_me.used=&field.has_patch.used=&field.has_branches.used=&field.has_branches=on&field.has_no_branches.used=&field.has_no_branches=on&field.has_blueprints.used=&field.has_blueprints=on&field.has_no_blueprints.used=&field.has_no_blueprints=on&search=Search).
+
+#### Resuming from suspend on Nvidia
+
+Resuming from suspend on Nvidia desktops (where Nvidia is the primary GPU so generally not laptops)  will exhibit visual corruption and freezes using the default Wayland session  ([LP#1876632](https://bugs.launchpad.net/bugs/1876632)). If you need suspend/resume support then the simplest solution is to select ‘Ubuntu on Xorg’ at the login screen.
+
+#### Classic fonts
+
+Installing `ubuntu-fonts-classic` results in a non-Ubuntu font being displayed ([LP#2083683](https://bugs.launchpad.net/bugs/2083683)). To resolve this, install `gnome-tweaks` and set ‘Interface Text’ to ‘Ubuntu’.
+
+### Server issues
+
+#### Apache2 security hardening breaks the `mod-php` JIT
+
+The Apache2 `systemd` service unit now sets the `MemoryDenyWriteExecute=yes` option by default as a security hardening measure. This prevents simultaneously writable and executable memory mappings. However, it breaks PHP's JIT compiler when using the `libapache2-mod-php` module, producing warnings such as the following:
+
+```text
+Warning: preg_match(): Allocation of JIT memory failed, PCRE JIT will be disabled.
+```
+
+We recommend that you switch from `mod-php` to the `php-fpm` service, which isn't affected by the change.
+
+If you want to continue using `mod-php`, override the setting by editing the Apache2 `systemd` unit:
+
+1. Open the editor:
+
+    ```
+    sudo systemctl edit apache2
+    ```
+
+2. Uncomment and edit the following line and save:
+
+    ```ini
+    [Service]
+    MemoryDenyWriteExecute=no
+    ```
+
+3. Restart Apache2:
+
+    ```bash
+    sudo systemctl restart apache2
+    ```
+
+See [LP: #2144455](https://bugs.launchpad.net/ubuntu-release-notes/+bug/2144455) and the [systemd.exec documentation](https://www.freedesktop.org/software/systemd/man/latest/systemd.exec.html#MemoryDenyWriteExecute=) for more information.
+
+#### RabbitMQ
+
+```{include} /reuse/26.04/rabbitmq-upgrade.txt
+```
+
+<!--
+#### Openstack
+
+Currently, Nova Compute is non-functional because of a python3.13 incompatiblity ([LP:#2103413](https://bugs.launchpad.net/ubuntu/+source/nova/+bug/2103413)).
+The Openstack team and Upstream work on it and it will be resolved via an SRU later.
+
+The Ubuntu Cloud Archive is not affected by this bug.
+-->
+
+#### Microsoft Azure
+
+The current version of `walinuxagent` relies on `python3-legacycrypt` for password changing functionality but it cannot be made a dependency due to a component mismatch ([LP: #2106484](https://launchpad.net/bugs/2106484)).
+
+#### Installer
+
+On systems booting via U-Boot, U-Boot should be updated to the current Plucky version before installation as subiquity does not run flash-kernel and grub-update during the installation. So for first boot the device-tree from U-Boot will be used.
+
+* In some situations, it is acceptable to proceed with an offline installation when the mirror is inaccessible. In this scenario, it is advised to use:
+
+    ```yaml
+    apt:
+      fallback: offline-install
+    ```
+
+* Network interfaces left unconfigured at install time are assumed to be configured via dhcp4. If this doesn’t happen (for example, because the interface is physically not connected) the boot process will block and wait for a few minutes ([LP: #2063331](https://bugs.launchpad.net/subiquity/+bug/2063331)). This can be fixed by removing the extra interfaces from `/etc/netplan/50-cloud-init.conf` or by marking them as `optional: true`. Cloud-init is disabled on systems installed from ISO images, so settings will persist.
 
 ## Official flavors
 

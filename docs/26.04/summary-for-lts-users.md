@@ -216,6 +216,26 @@ Updated to 1.4.3 with many new features
 
 For complete details of all changes leading up to 1.4.3, please see the upstream release notes at <https://blog.clamav.net/>.
 
+### PHP
+
+PHP was updated to version 8.5. Among other enhancements and bugfixes, the highlighted changes since Ubuntu Noble 24.04 are:
+
+* Property hooks
+* Asymmetric visibility
+* Updated DOM API
+* A new URI Extension
+* The Pipe Operator
+* Clone With functionality
+* The `#[\NoDiscard]` Attribute
+* Closures and First-Class Callables in Constant Expressions
+* Persistent `cURL` Share Handles
+* `array_first()` and `array_last()` functions
+
+For more details, breaking changes and other features, see the upstream release notes:
+
+* [PHP 8.4](https://www.php.net/releases/8.4/en.php)
+* [PHP 8.5](https://www.php.net/releases/8.5/en.php)
+
 ### Dovecot
 
 Updated to 2.4.2. Version 2.4 introduced many changes to the Dovecot configuration format!
@@ -232,6 +252,11 @@ Specific release notes for major version releases since Ubuntu 24.04 LTS (Noble 
 * 3.10.0: https://www.postfix.org/announcements/postfix-3.10.0.html
 
 A noteworthy change in the packaging of Postfix is that **by default it is no longer installed in a chroot, and only limited chroot support is available from now on**.
+
+### RabbitMQ
+
+```{include} /reuse/26.04/rabbitmq-upgrade.txt
+```
 
 ### Samba
 
@@ -309,12 +334,57 @@ For a list of all changes and fixes, please check the [upstream releases page](h
 ```
 
 ### HAProxy
+:::{versionchanged} 26.04
+:::
 
 HAProxy was updated to the latest upstream LTS release, 3.2, which introduces performance and efficiency improvements, faster and more reliable QUIC protocol support, and more. For further details on this new release, please check the HAProxy 3.2 [upstream announcement](https://www.mail-archive.com/haproxy@formilux.org/msg45917.html).
 
-For users coming from HAPRoxy 2, breaking changes include detection of accidental multiple commands sent to the Runtime API, rejecting the enabled keyword for dynamic servers, stricter parsing of non-standard URIs and renaming of `tune.ssl.ocsp-update` to `tune.ocsp-update`.
+For users coming from HAProxy 2, breaking changes include detection of accidental multiple commands sent to the Runtime API, rejecting the enabled keyword for dynamic servers, stricter parsing of non-standard URIs and renaming of `tune.ssl.ocsp-update` to `tune.ocsp-update`.
 
 You can learn more at [Announcing HAProxy 3.0](https://www.haproxy.com/blog/announcing-haproxy-3-0). A complete list of changes is available in the [upstream changelog](https://www.haproxy.org/download/3.0/src/CHANGELOG).
+
+### DocumentDB
+:::{versionadded} 26.04
+:::
+
+```{include} /reuse/26.04/documentdb-0.108-0-features.txt
+```
+
+### MySQL
+:::{versionadded} 25.04
+:::
+
+MySQL was updated from 8.0 to 8.4 LTS, starting with 8.4.8 in Ubuntu 26.04. This is MySQL's first official long term support release, including various internal improvements, new features, and some important configuration changes.
+
+Upstream release notes are available in the [Mysql 8.4 documentation library](https://dev.mysql.com/doc/relnotes/mysql/8.4/en/). For more information about the transition from MySQL 8.0 to 8.4, see the [MySQL 8.4 overview](https://dev.mysql.com/doc/refman/8.4/en/mysql-nutshell.html).
+
+Due to upstream policy, support for 32-bit MySQL Server has been removed. However, Ubuntu will continue to provide a MySQL client and client library for 8.4 on armhf and i386.
+
+### MySQL Shell
+:::{versionadded} 25.04
+:::
+
+MySQL Shell was updated from major version 8.0 to 8.4 to coincide with MySQL 8.4. It adds support for MySQL 8.4 servers, and provides additional improvements for interacting with MySQL 8.0 servers. For a list of features, see the [MySQL Shell 8.4 documentation](https://dev.mysql.com/doc/mysql-shell/8.4/en/). Release notes for MySQL Shell 8.4 can be found [here](https://dev.mysql.com/doc/relnotes/mysql-shell/8.4/en/).
+
+### PostgreSQL
+:::{versionadded} 26.04
+:::
+
+```{include} /reuse/26.04/postgresql-18-features.txt
+```
+
+### Valkey
+:::{versionadded} 26.04
+:::
+
+```{include} /reuse/26.04/valkey-9.0-features.txt
+```
+
+### Container stacks
+:::{versionadded} 25.10
+:::
+
+For the `containerd` and `runc` packages, we established a pattern to either keep the regular updates to the latest version or to opt for slower, more stable updates throughout the time the release is active. For more please read [Ubuntu Server Gazette - Issue 8 - Containers: Steady paths for agile stacks](https://discourse.ubuntu.com/t/ubuntu-server-gazette-issue-8-containers-steady-paths-for-agile-stacks/68680).
 
 ## Development
 
