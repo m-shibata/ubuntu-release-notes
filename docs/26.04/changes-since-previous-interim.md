@@ -444,7 +444,7 @@ Enhanced Reliability
 Documentation
 : Added a new `waagent` manpage for better local access to command-line documentation.
 
-To overcome the former issues around password-changing functionality it will now utilize sha512_crypt of python3-passlib to be compatibly with python 3.13 that removed crypt.
+To overcome the former issues around password-changing functionality it will now utilize sha512_crypt of python3-passlib to be compatible with python 3.13 that removed crypt.
 
 For further details on the changes in this update, please refer to the upstream release notes:
 
