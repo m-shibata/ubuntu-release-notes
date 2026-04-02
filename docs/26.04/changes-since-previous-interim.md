@@ -444,7 +444,7 @@ Enhanced Reliability
 Documentation
 : Added a new `waagent` manpage for better local access to command-line documentation.
 
-To overcome the former issues around password-changing functionality it will now utilize sha512_crypt of python3-passlib to be compatibly with python 3.13 that removed crypt.
+To overcome the former issues around password-changing functionality it will now utilize sha512_crypt of python3-passlib to be compatible with python 3.13 that removed crypt.
 
 For further details on the changes in this update, please refer to the upstream release notes:
 
@@ -861,10 +861,6 @@ The Openstack team and Upstream work on it and it will be resolved via an SRU la
 
 The Ubuntu Cloud Archive is not affected by this bug.
 -->
-
-#### Microsoft Azure
-
-The current version of `walinuxagent` relies on `python3-legacycrypt` for password changing functionality but it cannot be made a dependency due to a component mismatch ([LP: #2106484](https://launchpad.net/bugs/2106484)).
 
 #### Installer
 
