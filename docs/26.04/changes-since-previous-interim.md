@@ -112,6 +112,10 @@ Finally several packages were updated to their latest upstream version to pick u
 
 The GNOME desktop environment has been updated to version 50.
 
+#### GStreamer 1.28
+
+The GStreamer multimedia framework has been updated to [version 1.28](https://gstreamer.freedesktop.org/releases/1.28/).
+
 #### Added graphical Ubuntu Insights management controls to Settings
 
 Graphical controls to finely control Ubuntu Insights consent states as well as to preview reports have been added to Settings. They can be found under *Privacy & Security* within the *Telemetry* panel, which also replaces the *Diagnostics* panel.
