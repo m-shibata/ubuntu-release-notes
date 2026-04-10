@@ -801,10 +801,6 @@ TPM-backed full disk encryption (TPM/FDE) has been introduced to enhance data se
 
 * Certain **self-healing and reparation options** for defective systems after installation are currently missing.
 
-* TPM/FDE is incompatible with the **Absolute** (formerly **Computrace**) security software.
-
-    If Absolute is enabled on your system, the machine will not boot post-installation when TPM/FDE is also enabled. Therefore, disabling Absolute from the BIOS is recommended to avoid booting issues.
-
 * TPM/FDE requires a specific kernel snap which may not include certain **kernel modules** necessary for some hardware functionalities. A notable example is the `vmd` module required for **NVMe RAID** configurations.
 
     In scenarios where such specific kernel modules are needed, you might have to disable the hardware feature (such as RAID) in the firmware to ensure the continued availability of the affected hardware post-installation. If disabling in the firmware is not an option, the related hardware will not be available post-installation with TPM/FDE enabled.
