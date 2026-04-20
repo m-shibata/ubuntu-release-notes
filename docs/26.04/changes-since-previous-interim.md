@@ -122,6 +122,11 @@ Cryptography libraries have been updated to recent versions:
 
 The GNOME desktop environment has been updated to version 50.
 
+#### Resources replaces System Monitor
+
+```{include} /reuse/26.04/gnome-resources.txt
+```
+
 #### GStreamer 1.28
 
 The GStreamer multimedia framework has been updated to [version 1.28](https://gstreamer.freedesktop.org/releases/1.28/).
