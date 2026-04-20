@@ -52,6 +52,12 @@ The Image Viewer app is now provided by [Loupe](https://apps.gnome.org/Loupe/) i
 
 The Terminal app is now provided by [Ptyxis](https://gitlab.gnome.org/chergert/ptyxis/-/blob/main/README.md?ref_type=heads) instead of GNOME Terminal.
 
+Some of its major features:
+
+* Quick access to containers through `podman`, `toolbox` or `distrobox`
+* Session-save to restore tabs in their directory as well as their container after re-opening the app
+* Light and dark theme support with color palettes that extend into the window itself
+
 ### New system monitor
 
 ```{include} /reuse/26.04/gnome-resources.txt

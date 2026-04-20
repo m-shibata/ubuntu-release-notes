@@ -127,6 +127,12 @@ The GNOME desktop environment has been updated to version 50.
 ```{include} /reuse/26.04/gnome-resources.txt
 ```
 
+#### A new color palette in the terminal
+
+The terminal app (Ptyxis) brings a new Ubuntu color palette with accessible color-contrast and a light-theme variant.
+
+The color palette is available starting with Ptyxis version `50.1-1ubuntu2`. You'll receive this version update shortly after the Ubuntu 26.04 LTS release.
+
 #### GStreamer 1.28
 
 The GStreamer multimedia framework has been updated to [version 1.28](https://gstreamer.freedesktop.org/releases/1.28/).
