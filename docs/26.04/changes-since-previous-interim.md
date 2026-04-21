@@ -845,7 +845,9 @@ PMDK sees some hardware-specific failures in its test suite, which may make the 
   - Time zone input dropdown can "wobble" ([LP: #2084611](https://launchpad.net/bugs/2084611))
   - The hostname change is mandatory ([LP: #2093132](https://launchpad.net/bugs/2093132))
 
-* During boot on the server image, if your `cloud-init` configuration (in `user-data` on the boot partition) relies upon networking (importing SSH keys, installing packages, etc.) you *must* ensure that at least one network interface is required (`optional: false`) in `network-config` on the boot partition. This is due to Netplan changes to the `wait-online` service (~~[LP: #2060311](https://launchpad.net/bugs/2060311)~~). Furthermore, a current issue may cause `cloud-init` to run before the network is ready ([LP: #2144891](https://launchpad.net/bugs/2144891))
+* During boot on the server image, if your `cloud-init` configuration (in `user-data` on the boot partition) relies upon networking (importing SSH keys, installing packages, etc.) you *must* ensure that at least one network interface is required (`optional: false`) in `network-config` on the boot partition.
+  - This is due to Netplan changes to the `wait-online` service ([LP: #2060311](https://launchpad.net/bugs/2060311)).
+  - Furthermore, a current issue may still cause `cloud-init` to run before the network is ready ([LP: #2144891](https://launchpad.net/bugs/2144891))
 
 * With the removal of the `crda` package in 22.04, the method of setting the WiFi regulatory domain (editing `/etc/default/crda`) no longer operates. On server images, use the `regulatory-domain` option in the Netplan configuration. On desktop images, append `cfg80211.ieee80211_regdom=GB` (substituting `GB` for the relevant country code) to the kernel command line in the `cmdline.txt` file on the boot partition  ([LP: #1951586](https://launchpad.net/bugs/1951586)).
 
