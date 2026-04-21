@@ -682,13 +682,13 @@ A new layout of the boot partition is introduced to enhance the reliability of t
 :::{warning}
 Please note that, due to the new boot process, the boot firmware on your Pi *must* be up to date.
 
-For Pi 3, 3+, and Zero 2W
+For Pi 3, 3+, CM3+, and Zero 2W
 : No action required, the boot firmware is in the image itself.
 
-For Pi 4
+For Pi 4, 400, CM4
 : Your boot firmware *must* be dated no earlier than **2022-11-25**. To check, run `sudo rpi-eeprom-update`. If your firmware is dated earlier, using Ubuntu 24.04 LTS (Noble Numbat) or later, run `sudo rpi-eeprom-update -a` and reboot.
 
-For Pi 5
+For Pi 5, 500, CM5
 : No action required, all firmware since release of the platform are compatible.
 :::
 
