@@ -842,7 +842,6 @@ PMDK sees some hardware-specific failures in its test suite, which may make the 
 #### Raspberry Pi
 
 * The new `gnome-initial-setup` has issues preventing it from working properly:
-  - The selected key layout does not persist ([LP: #2127782](https://launchpad.net/bugs/2127782))
   - Time zone input dropdown can "wobble" ([LP: #2084611](https://launchpad.net/bugs/2084611))
   - The hostname change is mandatory ([LP: #2093132](https://launchpad.net/bugs/2093132))
 
