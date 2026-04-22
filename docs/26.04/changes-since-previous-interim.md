@@ -720,6 +720,8 @@ IBM Z generation z14 (LinuxONE II) is still supported by Ubuntu Server 24.04 LTS
 
 ## Deprecated features
 
+The following features are planned to be removed in a future Ubuntu release.
+
 ### Server deprecations
 
 #### PHP
