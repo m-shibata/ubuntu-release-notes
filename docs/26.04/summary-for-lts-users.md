@@ -58,7 +58,11 @@ The GNOME desktop environment has been updated to version 50. Notable changes si
 :::{rubric} From GNOME 49
 :::
 
-todo
+* The calendar app is now fully accessible when using the keyboard.
+* The Web app improves ad-blocking, estimates page reading time, enhances security options and improves search.
+* The remote desktop solution now supports multi-touch input for touch screens, relative mouse input for gaming, and extended virtual monitors.
+* Media playback controls are now displayed on the lock screen.
+* The accessibility menu is now easier to find on the login screen.
 
 :::{rubric} From GNOME 50
 :::
@@ -66,15 +70,13 @@ todo
 ```{include} /reuse/26.04/gnome-50-news.txt
 ```
 
-Other major highlights:
+:::{rubric} Other major highlights
+:::
 
 * You can now set an application to start automatically after login in {menuselection}`Settings --> Apps`.
 * Fractional scaling factors are now optimized so as to minimize blur.
 * The default monospace font size has been reduced to match the default user interface font size. The monospace font is used in terminals and similar applications.
 * The [Sysprof](https://apps.gnome.org/Sysprof/) app is installed by default as a new system utility. This makes it easier to discover performance issues in your apps.
-
-    :::{versionadded} 24.10
-    :::
 
 For details, see the upstream release notes: [GNOME 47](https://release.gnome.org/47/), [GNOME 48](https://release.gnome.org/48/), [GNOME 49](https://release.gnome.org/49/) and [GNOME 50](https://release.gnome.org/50/).
 
