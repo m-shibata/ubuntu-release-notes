@@ -39,7 +39,7 @@ Ubuntu 26.04 LTS is shipping with the Linux kernel 7.0, based on the upstream fi
 * Following the [upstream change](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=9fa7153c31a3), the Rust programming language experiment has been deemed concluded and its support is not flagged as experimental anymore. 
 * Upstream Linux kernel 7.0 delivers improved support for Intel® Core™ Ultra Series 3 processors (codenamed Panther Lake), introducing targeted optimizations for Intel Xe3 integrated graphics and the integrated NPU (Neural Processing Unit).
 * `cgroupfs` is now mounted with `nsdelegate,memory_recursiveprot,memory_hugetlb_accounting`.
-* Integrated IgH EtherCAT Master module and Generic driver ([LP: #2138621](https://bugs.launchpad.net/ubuntu/+source/linux/+bug/2138621)). These modules provide real-time performance for industrial EtherCAT networks.
+* Integrated IgH EtherCAT module and Generic driver ([LP: #2138621](https://bugs.launchpad.net/ubuntu/+source/linux/+bug/2138621)). These modules provide real-time performance for industrial EtherCAT networks.
 * The real-time Linux kernel is available in the main archive (outside of Ubuntu Pro) in Ubuntu 26.04 LTS. Following the `PREEMPT_RT` patches being upstreamed, the Ubuntu 26.04 LTS release of the real-time kernel is available for free for anyone to use.
 * Kernel Livepatch now supports the ARM64 architecture.
 * ZFS has been updated to the latest 2.4.1 version ([upstream changelog](https://github.com/openzfs/zfs/releases/tag/zfs-2.4.1)).

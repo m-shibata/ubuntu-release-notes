@@ -897,7 +897,7 @@ For users running the GA generic stack, the Linux kernel has been updated from v
     :::{versionadded} 26.04
     :::
 
-* Integrated IgH EtherCAT Master module and Generic driver ([LP: #2138621](https://bugs.launchpad.net/ubuntu/+source/linux/+bug/2138621)). These modules provide real-time performance for industrial EtherCAT networks.
+* Integrated IgH EtherCAT module and Generic driver ([LP: #2138621](https://bugs.launchpad.net/ubuntu/+source/linux/+bug/2138621)). These modules provide real-time performance for industrial EtherCAT networks.
 
     :::{versionadded} 26.04
     :::
