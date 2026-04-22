@@ -13,128 +13,6 @@ Ubuntu 26.04 LTS is currently in development, scheduled to be released in April 
 
 ## New features and improvements
 
-### System features
-
-#### cloud-init v. 26.1
-
-Cloud-init features introduced beyond v. 25.3 in Questing:
-
-* Add support for s390x platform detection on LXD
-* Add support for Tilaa cloud platform detection.
-* Fix LXD Snap installs on Plucky and newer
-* Scaleway cloud to support exposing regions and availability zones, drop private IP handling
-* Add network v1 support for bonds, bridges and VLANs
-* Allow `network-config` to express `allow_accept_ra` for bonds, bridges and VLANsOpenStack `network_data.json` support of bond names
-
-See [cloud-init’s release notes for more details](https://github.com/canonical/cloud-init/releases).
-
-#### fwupd
-
-Systems running TPM/FDE will now prompt for the recovery key before firmware updates that may require the recovery key upon reboot.
-
-#### Linux kernel 7.0 🐧
-
-Ubuntu 26.04 LTS is shipping with the Linux kernel 7.0, based on the upstream final release. Some notable features and changes:
-
-* Following the [upstream change](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=9fa7153c31a3), the Rust programming language experiment has been deemed concluded and its support is not flagged as experimental anymore. 
-* Upstream Linux kernel 7.0 delivers improved support for Intel® Core™ Ultra Series 3 processors (codenamed Panther Lake), introducing targeted optimizations for Intel Xe3 integrated graphics and the integrated NPU (Neural Processing Unit).
-* `cgroupfs` is now mounted with `nsdelegate,memory_recursiveprot,memory_hugetlb_accounting`.
-* Integrated IgH EtherCAT module and Generic driver ([LP: #2138621](https://bugs.launchpad.net/ubuntu/+source/linux/+bug/2138621)). These modules provide real-time performance for industrial EtherCAT networks.
-* The real-time Linux kernel is available in the main archive (outside of Ubuntu Pro) in Ubuntu 26.04 LTS. Following the `PREEMPT_RT` patches being upstreamed, the Ubuntu 26.04 LTS release of the real-time kernel is available for free for anyone to use.
-* Kernel Livepatch now supports the ARM64 architecture.
-* ZFS has been updated to the latest 2.4.1 version ([upstream changelog](https://github.com/openzfs/zfs/releases/tag/zfs-2.4.1)).
-* DOCA-OFED 26.01 kernel modules are available for the Ubuntu generic and select derivative kernels.
-
-Other features can be found in the [Linux 7.0 upstream changelog](https://kernelnewbies.org/Linux_7.0).
-
-#### Netplan v1.1.2 🌐
-
-...
-
-#### Package Management: APT 3.0
-
-...
-
-#### sudo-rs
-
-Password feedback is now enabled by default in order to improve the user experience of `sudo`.
-If the previous behavior is preferred, password feedback can be disabled using the following steps:
-
-1. Edit sudoers using `sudo visudo` in the terminal
-2. Add the option `Defaults !pwfeedback` to the configuration file
-
-#### systemd 259.5
-
-The `systemd` service manager has been updated to version 259. For a complete list of changes, see the [changelog](https://github.com/systemd/systemd/releases/tag/v259).
-
-Also, refer to the removed and deprecated functionality:
-
-* {ref}`cgroup-v1-removed`
-* {ref}`system-v-scripts-deprecated`
-
-#### TPM-backed full-disk encryption
-
-TPM-backed Full Disk Encryption (TPM/FDE) has been improved for Ubuntu 26.04, with a more robust and user-friendly experience on supported hardware:
-
-- The installer now provides better guidance and readiness checks.
-- PIN support is fully integrated.
-- User messaging across the system has been refined.
-- Security has been strengthened, including recovery key prompts during sensitive operations like firmware updates.
-- Expanded test coverage improves overall reliability.
-
-Some limitations remain: see {ref}`resolute-tpm-fde-limitations`.
-
-#### Ubuntu Insights integration with the release upgrader
-
-When Ubuntu Insights is available and configured, the release upgrader will now use Ubuntu Insights at the end of a release upgrade to generate a report based on the existing consent state. Note, this change does not prevent the Ubuntu Report-based collection that may be triggered by a release upgrade.
-
-This change only affects Desktop and WSL since presently, these are the only platforms that include Ubuntu Insights.
-
-(ibm-z15-level)=
-#### IBM Z and LinuxONE (s390x)
-
-The following provides an overview of selected and significant s390x-specific enhancements and improvements that landed in Ubuntu Server 26.04 for IBM Z and LinuxONE.
-
-On the IBM Z (s390x) architecture, the architectural level set (ALS) was raised to build for IBM Z generation z15 (LinuxONE Emperor III) with the `march=z15` and `mtune=z16` compiler options ([LP: #2126577](https://launchpad.net/bugs/2126577)). This brings performance improvements on the later generations
-
-{ref}`ibm-z14-support-removed`.
-
-With every new Ubuntu Server release the `s390-tools` package was gradually upgraded to its latest available release v2.41 ([LP: #2141945](https://launchpad.net/bugs/2141945)), that now:
-
-* adds a `udev` rule to set `none` as default I/O scheduler for `virtio-blk` devices ([LP: #2138886](https://launchpad.net/bugs/2138886))
-* adds a `udev` rule to disable the `rotational` attribute for `virtio-blk` (especially important for swapping or paging) ([LP: #2138887](https://launchpad.net/bugs/2138887))
-* introduces the new `pvverify` tool, that allows to verify host key documents in the context of Secure Execution (SE) ([LP: #2138888](https://launchpad.net/bugs/2138888))
-* and the `pvimg info` command was enhanced to display additional SE image information ([LP: #2141952](https://launchpad.net/bugs/2141952))
-
-KVM enhancements arrived by adding zVDT Parallel Sysplex support ([LP: #2142654](https://launchpad.net/bugs/2142654)) and by rewriting `gmap` using MMU notifiers ([LP: #2142682](https://launchpad.net/bugs/2142682)).
-
-In the area of cryptography the following updates and improvements happened:
-
-* `zkey` support for `dm-integrity` with HMAC was added to the `s390-tools` package ([LP: #2096889](https://launchpad.net/bugs/2096889)) and to the kernel ([LP: #2138650](https://launchpad.net/bugs/2138650))
-* PHMAC was added to `cryptsetup` ([LP: #2138512](https://launchpad.net/bugs/2138512)), and required also `systemd` ([LP: #2138511](https://launchpad.net/bugs/2138511)) updates.
-* The default use of clear keys by PAES and PHMAC in-kernel crypt modules was disabled ([LP: #2139610](https://launchpad.net/bugs/2139610)), but they can still be explicitly allowed with a module parameter.
-* An overwrite function was added to the `zcrypt` driver, allowing the configuring of the device driver on a per APQN basis ([LP: #2138854](https://launchpad.net/bugs/2138854))
-* The upgrade to `opecryptoki` v3.26 ([LP: #2135123](https://launchpad.net/bugs/2135123)) added ML-KEM and ML-DSA support for `ep11` token ([LP: #2138514](https://launchpad.net/bugs/2138514)) and `cca` token ([LP: #2138515](https://launchpad.net/bugs/2138515)) and BLS support for `ep11` token ([LP: #2138804](https://launchpad.net/bugs/2138804)).
-* The upgrade of `libzpc` to v1.4.1 ([LP: #2136312](https://launchpad.net/bugs/2136312)) removed a protected key verification pattern mismatch, now allowing to support Live Guest Relocation ([LP: #2140342](https://launchpad.net/bugs/2140342))
-
-The kernel also received selected improvements, like support for 128 KB tape block sizes ([LP: #2141569](https://launchpad.net/bugs/2141569)) and support for dynamic (de)configuration of hot-pluggable memory ([LP: #2142862](https://launchpad.net/bugs/2142862)).
-
-Finally several packages were updated to their latest upstream version to pick up s390x-specific upstream fixes and improvements. For example:
-
-* `valgrind`, for full z17 support ([LP: #2139096](https://launchpad.net/bugs/2139096))
-* `libdfp`, mainly fixes ([LP: #2122325](https://launchpad.net/bugs/2122325))
-* `smc-tools` for fixes and additional statistics output ([LP: #2142098](https://launchpad.net/bugs/2142098))
-
-#### Updated cryptography libraries
-
-Cryptography libraries have been updated to recent versions:
-
-* OpenSSL has been updated to the latest upstream LTS [3.5.6](https://launchpad.net/ubuntu/+source/openssl) version
-* GnuTLS to version 3.8.12
-* NSS to version [3.120](https://launchpad.net/ubuntu/+source/nss/2:3.120-1ubuntu2)
-* `libgcrypt` to version 1.12.0
-* `libsodium` to version 1.0.18 (includes security fixes from [1.0.21](https://github.com/jedisct1/libsodium/releases/tag/1.0.21-RELEASE))
-
 ### Desktop features
 
 #### GNOME 50
@@ -586,39 +464,130 @@ We encourage developers to turn on cargo-auditable support for their own package
 
 For more information, including how to opt in, see the [Ubuntu project documentation](https://documentation.ubuntu.com/project/contributors/language-specific/rust/cargo-auditable/).
 
+### System features
+
+#### cloud-init v. 26.1
+
+Cloud-init features introduced beyond v. 25.3 in Questing:
+
+* Add support for s390x platform detection on LXD
+* Add support for Tilaa cloud platform detection.
+* Fix LXD Snap installs on Plucky and newer
+* Scaleway cloud to support exposing regions and availability zones, drop private IP handling
+* Add network v1 support for bonds, bridges and VLANs
+* Allow `network-config` to express `allow_accept_ra` for bonds, bridges and VLANsOpenStack `network_data.json` support of bond names
+
+See [cloud-init’s release notes for more details](https://github.com/canonical/cloud-init/releases).
+
+#### fwupd
+
+Systems running TPM/FDE will now prompt for the recovery key before firmware updates that may require the recovery key upon reboot.
+
+#### Linux kernel 7.0 🐧
+
+Ubuntu 26.04 LTS is shipping with the Linux kernel 7.0, based on the upstream final release. Some notable features and changes:
+
+* Following the [upstream change](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=9fa7153c31a3), the Rust programming language experiment has been deemed concluded and its support is not flagged as experimental anymore. 
+* Upstream Linux kernel 7.0 delivers improved support for Intel® Core™ Ultra Series 3 processors (codenamed Panther Lake), introducing targeted optimizations for Intel Xe3 integrated graphics and the integrated NPU (Neural Processing Unit).
+* `cgroupfs` is now mounted with `nsdelegate,memory_recursiveprot,memory_hugetlb_accounting`.
+* Integrated IgH EtherCAT module and Generic driver ([LP: #2138621](https://bugs.launchpad.net/ubuntu/+source/linux/+bug/2138621)). These modules provide real-time performance for industrial EtherCAT networks.
+* The real-time Linux kernel is available in the main archive (outside of Ubuntu Pro) in Ubuntu 26.04 LTS. Following the `PREEMPT_RT` patches being upstreamed, the Ubuntu 26.04 LTS release of the real-time kernel is available for free for anyone to use.
+* Kernel Livepatch now supports the ARM64 architecture.
+* ZFS has been updated to the latest 2.4.1 version ([upstream changelog](https://github.com/openzfs/zfs/releases/tag/zfs-2.4.1)).
+* DOCA-OFED 26.01 kernel modules are available for the Ubuntu generic and select derivative kernels.
+
+Other features can be found in the [Linux 7.0 upstream changelog](https://kernelnewbies.org/Linux_7.0).
+
+#### Netplan v1.1.2 🌐
+
+...
+
+#### Package Management: APT 3.0
+
+...
+
+#### sudo-rs
+
+Password feedback is now enabled by default in order to improve the user experience of `sudo`.
+If the previous behavior is preferred, password feedback can be disabled using the following steps:
+
+1. Edit sudoers using `sudo visudo` in the terminal
+2. Add the option `Defaults !pwfeedback` to the configuration file
+
+#### systemd 259.5
+
+The `systemd` service manager has been updated to version 259. For a complete list of changes, see the [changelog](https://github.com/systemd/systemd/releases/tag/v259).
+
+Also, refer to the removed and deprecated functionality:
+
+* {ref}`cgroup-v1-removed`
+* {ref}`system-v-scripts-deprecated`
+
+#### TPM-backed full-disk encryption
+
+TPM-backed Full Disk Encryption (TPM/FDE) has been improved for Ubuntu 26.04, with a more robust and user-friendly experience on supported hardware:
+
+- The installer now provides better guidance and readiness checks.
+- PIN support is fully integrated.
+- User messaging across the system has been refined.
+- Security has been strengthened, including recovery key prompts during sensitive operations like firmware updates.
+- Expanded test coverage improves overall reliability.
+
+Some limitations remain: see {ref}`resolute-tpm-fde-limitations`.
+
+#### Ubuntu Insights integration with the release upgrader
+
+When Ubuntu Insights is available and configured, the release upgrader will now use Ubuntu Insights at the end of a release upgrade to generate a report based on the existing consent state. Note, this change does not prevent the Ubuntu Report-based collection that may be triggered by a release upgrade.
+
+This change only affects Desktop and WSL since presently, these are the only platforms that include Ubuntu Insights.
+
+(ibm-z15-level)=
+#### IBM Z and LinuxONE (s390x)
+
+The following provides an overview of selected and significant s390x-specific enhancements and improvements that landed in Ubuntu Server 26.04 for IBM Z and LinuxONE.
+
+On the IBM Z (s390x) architecture, the architectural level set (ALS) was raised to build for IBM Z generation z15 (LinuxONE Emperor III) with the `march=z15` and `mtune=z16` compiler options ([LP: #2126577](https://launchpad.net/bugs/2126577)). This brings performance improvements on the later generations
+
+{ref}`ibm-z14-support-removed`.
+
+With every new Ubuntu Server release the `s390-tools` package was gradually upgraded to its latest available release v2.41 ([LP: #2141945](https://launchpad.net/bugs/2141945)), that now:
+
+* adds a `udev` rule to set `none` as default I/O scheduler for `virtio-blk` devices ([LP: #2138886](https://launchpad.net/bugs/2138886))
+* adds a `udev` rule to disable the `rotational` attribute for `virtio-blk` (especially important for swapping or paging) ([LP: #2138887](https://launchpad.net/bugs/2138887))
+* introduces the new `pvverify` tool, that allows to verify host key documents in the context of Secure Execution (SE) ([LP: #2138888](https://launchpad.net/bugs/2138888))
+* and the `pvimg info` command was enhanced to display additional SE image information ([LP: #2141952](https://launchpad.net/bugs/2141952))
+
+KVM enhancements arrived by adding zVDT Parallel Sysplex support ([LP: #2142654](https://launchpad.net/bugs/2142654)) and by rewriting `gmap` using MMU notifiers ([LP: #2142682](https://launchpad.net/bugs/2142682)).
+
+In the area of cryptography the following updates and improvements happened:
+
+* `zkey` support for `dm-integrity` with HMAC was added to the `s390-tools` package ([LP: #2096889](https://launchpad.net/bugs/2096889)) and to the kernel ([LP: #2138650](https://launchpad.net/bugs/2138650))
+* PHMAC was added to `cryptsetup` ([LP: #2138512](https://launchpad.net/bugs/2138512)), and required also `systemd` ([LP: #2138511](https://launchpad.net/bugs/2138511)) updates.
+* The default use of clear keys by PAES and PHMAC in-kernel crypt modules was disabled ([LP: #2139610](https://launchpad.net/bugs/2139610)), but they can still be explicitly allowed with a module parameter.
+* An overwrite function was added to the `zcrypt` driver, allowing the configuring of the device driver on a per APQN basis ([LP: #2138854](https://launchpad.net/bugs/2138854))
+* The upgrade to `opecryptoki` v3.26 ([LP: #2135123](https://launchpad.net/bugs/2135123)) added ML-KEM and ML-DSA support for `ep11` token ([LP: #2138514](https://launchpad.net/bugs/2138514)) and `cca` token ([LP: #2138515](https://launchpad.net/bugs/2138515)) and BLS support for `ep11` token ([LP: #2138804](https://launchpad.net/bugs/2138804)).
+* The upgrade of `libzpc` to v1.4.1 ([LP: #2136312](https://launchpad.net/bugs/2136312)) removed a protected key verification pattern mismatch, now allowing to support Live Guest Relocation ([LP: #2140342](https://launchpad.net/bugs/2140342))
+
+The kernel also received selected improvements, like support for 128 KB tape block sizes ([LP: #2141569](https://launchpad.net/bugs/2141569)) and support for dynamic (de)configuration of hot-pluggable memory ([LP: #2142862](https://launchpad.net/bugs/2142862)).
+
+Finally several packages were updated to their latest upstream version to pick up s390x-specific upstream fixes and improvements. For example:
+
+* `valgrind`, for full z17 support ([LP: #2139096](https://launchpad.net/bugs/2139096))
+* `libdfp`, mainly fixes ([LP: #2122325](https://launchpad.net/bugs/2122325))
+* `smc-tools` for fixes and additional statistics output ([LP: #2142098](https://launchpad.net/bugs/2142098))
+
+#### Updated cryptography libraries
+
+Cryptography libraries have been updated to recent versions:
+
+* OpenSSL has been updated to the latest upstream LTS [3.5.6](https://launchpad.net/ubuntu/+source/openssl) version
+* GnuTLS to version 3.8.12
+* NSS to version [3.120](https://launchpad.net/ubuntu/+source/nss/2:3.120-1ubuntu2)
+* `libgcrypt` to version 1.12.0
+* `libsodium` to version 1.0.18 (includes security fixes from [1.0.21](https://github.com/jedisct1/libsodium/releases/tag/1.0.21-RELEASE))
+
+
 ## Backwards-incompatible changes
-
-### System changes
-
-(cgroup-v1-removed)=
-#### `cgroup` v1 support has been removed
-
-`systemd` version 259 no longer supports `cgroup` v1 (`legacy` and `hybrid`) hierarchies. As a result:
-
-  * Ubuntu installations running `cgroup` v1 will not be allowed to upgrade to Ubuntu 26.04 LTS.
-  * Ubuntu 26.04 LTS container workloads will not run on a host booted with `cgroup` v1.
-  * Ubuntu 26.04 LTS hosts do not support container workloads that require `cgroup` v1: for example, Ubuntu earlier than 18.04 LTS.
-
-This change was made in `systemd` version 258. See the [changelog](https://github.com/systemd/systemd/releases/tag/v258) for more information.
-
-#### Removable media are mounted under `/run/media`
-
-In previous Ubuntu releases, removable media were mounted under the `/media` directory. Starting with Ubuntu 26.04 LTS, `/run/media` is now the mount directory instead. This has several benefits:
-
-- Better support for read-only root file systems
-- Better alignment with other distributions and upstream defaults
-- Not requiring special cleanup routines because `/run` is hosted on a virtual memory file system (`tmpfs`)
-
-If you rely on the specific directory path for media access, check that your setup still works. For example, test your existing scripts.
-
-[LP#2130110](https://bugs.launchpad.net/ubuntu/+source/udisks2/+bug/2130110)
-
-(ibm-z14-support-removed)=
-#### Ubuntu no longer supports IBM Z generations z14 or older
-
-On the IBM Z (s390s) architecture, the architectural level set (ALS) was raised to build for IBM Z generation z15 ([LP: #2126577](https://launchpad.net/bugs/2126577)). As a result, Ubuntu 26.04 LTS no longer works on IBM Z generations z14 (LinuxONE II) or older. You can't install Ubuntu 26.04 LTS on this hardware or upgrade to it. The `ubuntu-release-upgrader` prevents you from performing the upgrade.
-
-IBM Z generation z14 (LinuxONE II) is still supported by Ubuntu Server 24.04 LTS for up to 15 years in total.
 
 ### Desktop changes
 
@@ -716,24 +685,40 @@ The Manila V1 API and the Manila shell utility have been removed.
 
 For details, see the Manila [release highlights](https://releases.openstack.org/gazpacho/highlights#manila) and [release notes](https://docs.openstack.org/releasenotes/manila/2026.1.html).
 
-<!--
-### Security changes
--->
+### System changes
+
+(cgroup-v1-removed)=
+#### `cgroup` v1 support has been removed
+
+`systemd` version 259 no longer supports `cgroup` v1 (`legacy` and `hybrid`) hierarchies. As a result:
+
+  * Ubuntu installations running `cgroup` v1 will not be allowed to upgrade to Ubuntu 26.04 LTS.
+  * Ubuntu 26.04 LTS container workloads will not run on a host booted with `cgroup` v1.
+  * Ubuntu 26.04 LTS hosts do not support container workloads that require `cgroup` v1: for example, Ubuntu earlier than 18.04 LTS.
+
+This change was made in `systemd` version 258. See the [changelog](https://github.com/systemd/systemd/releases/tag/v258) for more information.
+
+#### Removable media are mounted under `/run/media`
+
+In previous Ubuntu releases, removable media were mounted under the `/media` directory. Starting with Ubuntu 26.04 LTS, `/run/media` is now the mount directory instead. This has several benefits:
+
+- Better support for read-only root file systems
+- Better alignment with other distributions and upstream defaults
+- Not requiring special cleanup routines because `/run` is hosted on a virtual memory file system (`tmpfs`)
+
+If you rely on the specific directory path for media access, check that your setup still works. For example, test your existing scripts.
+
+[LP#2130110](https://bugs.launchpad.net/ubuntu/+source/udisks2/+bug/2130110)
+
+(ibm-z14-support-removed)=
+#### Ubuntu no longer supports IBM Z generations z14 or older
+
+On the IBM Z (s390s) architecture, the architectural level set (ALS) was raised to build for IBM Z generation z15 ([LP: #2126577](https://launchpad.net/bugs/2126577)). As a result, Ubuntu 26.04 LTS no longer works on IBM Z generations z14 (LinuxONE II) or older. You can't install Ubuntu 26.04 LTS on this hardware or upgrade to it. The `ubuntu-release-upgrader` prevents you from performing the upgrade.
+
+IBM Z generation z14 (LinuxONE II) is still supported by Ubuntu Server 24.04 LTS for up to 15 years in total.
+
 
 ## Deprecated features
-
-### System deprecations
-
-(system-v-scripts-deprecated)=
-#### Legacy System V service scripts are deprecated
-
-Ubuntu 26.04 LTS is the last release that supports System V service scripts compatibility in `systemd`. Migrate your legacy System V scripts to native `systemd` unit files.
-
-`systemd` version 260 [has already dropped support](https://github.com/systemd/systemd/releases/tag/v260), so this change will take effect in Ubuntu 26.10.
-
-### Desktop deprecations
-
-...
 
 ### Server deprecations
 
@@ -745,23 +730,17 @@ Ubuntu 26.04 LTS is the last release that supports System V service scripts comp
 
 Other breaking changes and new features can be seen in the [full upstream changelog](https://www.php.net/ChangeLog-8.php#PHP_8_5).
 
-<!--
-### Development deprecations
+### System deprecations
 
-### Enterprise deprecations
+(system-v-scripts-deprecated)=
+#### Legacy System V service scripts are deprecated
 
-### Cloud deprecations
+Ubuntu 26.04 LTS is the last release that supports System V service scripts compatibility in `systemd`. Migrate your legacy System V scripts to native `systemd` unit files.
 
-### Security deprecations
+`systemd` version 260 [has already dropped support](https://github.com/systemd/systemd/releases/tag/v260), so this change will take effect in Ubuntu 26.10.
 
-### Hardware support deprecations
--->
 
 ## Bug fixes
-
-### Desktop fixes
-
-...
 
 ### Server fixes
 
@@ -831,74 +810,6 @@ Action is only needed if you specified the old types explicitly in your old syst
 ## Known issues
 
 As is to be expected with any release, there are some significant known bugs that users may encounter with this release of Ubuntu. The ones we know about at this point (and some of the workarounds) are documented here, so you don’t need to spend time reporting these bugs again:
-
-### System issues
-
-#### Hardware requiring `nomodeset`
-
-Some particular hardware (e.g. Thinkpad x201) might have issues ([general freeze](https://bugs.launchpad.net/ubuntu/+source/linux/+bug/2084055), [`desktop-security-center` not launching](https://github.com/canonical/desktop-security-center/issues/81)), when booted without `nomodeset` (Safe graphics). Follow these steps if you encounter such an issue:
-
-1. At the GRUB boot menu, press `e` (keep `Shift` pressed during early boot if the menu doesn’t show up).
-2. Add `nomodeset` to `linux` line, like the example below:
-
-    ```text
-    linux /casper/vmlinuz nomodeset ---
-    ```
-
-3. Press {kbd}`Ctrl-x` to continue the boot process
-4. After installation is complete, reboot, use `nomodeset` again, like the example below:
-
-    ```text
-    linux /boot/vmlinuz-6.11.0-8-generic nomodeset root=UUID=c5605a23-05ae-4d9d-b65f-e47ba48b7560 ro
-    ```
-
-5. Add `nomodeset` to the GRUB config file, `/etc/default/grub`, like the example below:
-
-    ```text
-    GRUB_CMDLINE_LINUX="nomodeset"
-    ```
-
-6. Finally, run `sudo update-grub` to make the change take effect.
-
-#### Raspberry Pi
-
-* The new `gnome-initial-setup` has issues preventing it from working properly:
-  - Time zone input dropdown can "wobble" ([LP: #2084611](https://launchpad.net/bugs/2084611))
-  - The hostname change is mandatory ([LP: #2093132](https://launchpad.net/bugs/2093132))
-
-* During boot on the server image, if your `cloud-init` configuration (in `user-data` on the boot partition) relies upon networking (importing SSH keys, installing packages, etc.) you *must* ensure that at least one network interface is required (`optional: false`) in `network-config` on the boot partition.
-  - This is due to Netplan changes to the `wait-online` service ([LP: #2060311](https://launchpad.net/bugs/2060311)).
-  - Furthermore, a current issue may still cause `cloud-init` to run before the network is ready ([LP: #2144891](https://launchpad.net/bugs/2144891))
-
-* With the removal of the `crda` package in 22.04, the method of setting the WiFi regulatory domain (editing `/etc/default/crda`) no longer operates. On server images, use the `regulatory-domain` option in the Netplan configuration. On desktop images, append `cfg80211.ieee80211_regdom=GB` (substituting `GB` for the relevant country code) to the kernel command line in the `cmdline.txt` file on the boot partition  ([LP: #1951586](https://launchpad.net/bugs/1951586)).
-
-* On server images, re-authentication to WiFi APs when regulatory domain is set result in `dmesg` spam to the console ([LP: #2063365](https://launchpad.net/bugs/2063365))
-
-#### Netboot installs
-
-There is a bug ([LP: #2104316](https://bugs.launchpad.net/ubuntu-power-systems/+bug/2104297)) in the *beta* images that prevents netboot installs in some scenarios.
-
-#### cloud-init upgrade
-
-It has been reported that cloud-init may fail to upgrade properly in the Oracular to Plucky upgrade path, see [LP: #2104316](https://bugs.launchpad.net/ubuntu-power-systems/+bug/2104297).
-
-#### I/O scheduler
-
-A bug prevents the I/O scheduler from being reset to “none” ([LP: #2083845](https://bugs.launchpad.net/bugs/2083845)): the fix is already in Linux v6.11.2, and will be part of the first SRU kernel.
-
-#### FAN networking
-
-Support for FAN networking has been dropped in the 6.11 release kernel. It will be re-introduced in the next 6.11 kernel update shortly.
-
-#### POSIX ACL inheritance with `mkdir`
-
-POSIX Access Control Lists (ACLs) are not always appropriately inherited from parent directories. If a directory has ACLs set, and you create a directory path using `mkdir -p`, the created parents do not appropriately inherit ACLs.
-
-There is also a possibility of more open permissions being set for the directories.
-
-See the Ubuntu bug at [LP: #2138215](https://bugs.launchpad.net/ubuntu/+source/acl/+bug/2138215) and the upstream bug at [Issue #11036](https://github.com/uutils/coreutils/issues/11036).
-
-This issue was also present in Ubuntu 25.10.
 
 ### Desktop issues
 
@@ -1008,6 +919,75 @@ As reported in a [Linux mailing list](https://lore.kernel.org/lkml/2026040319194
 #### Google cloud
 
 On first boot, 26.04 images may be slowed by up to 30s due to an outstanding issue with `cloud-init` and `systemd` [(LP: #2148619)](https://bugs.launchpad.net/ubuntu/+source/systemd/+bug/2148619)
+
+### System issues
+
+#### Hardware requiring `nomodeset`
+
+Some particular hardware (e.g. Thinkpad x201) might have issues ([general freeze](https://bugs.launchpad.net/ubuntu/+source/linux/+bug/2084055), [`desktop-security-center` not launching](https://github.com/canonical/desktop-security-center/issues/81)), when booted without `nomodeset` (Safe graphics). Follow these steps if you encounter such an issue:
+
+1. At the GRUB boot menu, press `e` (keep `Shift` pressed during early boot if the menu doesn’t show up).
+2. Add `nomodeset` to `linux` line, like the example below:
+
+    ```text
+    linux /casper/vmlinuz nomodeset ---
+    ```
+
+3. Press {kbd}`Ctrl-x` to continue the boot process
+4. After installation is complete, reboot, use `nomodeset` again, like the example below:
+
+    ```text
+    linux /boot/vmlinuz-6.11.0-8-generic nomodeset root=UUID=c5605a23-05ae-4d9d-b65f-e47ba48b7560 ro
+    ```
+
+5. Add `nomodeset` to the GRUB config file, `/etc/default/grub`, like the example below:
+
+    ```text
+    GRUB_CMDLINE_LINUX="nomodeset"
+    ```
+
+6. Finally, run `sudo update-grub` to make the change take effect.
+
+#### Raspberry Pi
+
+* The new `gnome-initial-setup` has issues preventing it from working properly:
+  - Time zone input dropdown can "wobble" ([LP: #2084611](https://launchpad.net/bugs/2084611))
+  - The hostname change is mandatory ([LP: #2093132](https://launchpad.net/bugs/2093132))
+
+* During boot on the server image, if your `cloud-init` configuration (in `user-data` on the boot partition) relies upon networking (importing SSH keys, installing packages, etc.) you *must* ensure that at least one network interface is required (`optional: false`) in `network-config` on the boot partition.
+  - This is due to Netplan changes to the `wait-online` service ([LP: #2060311](https://launchpad.net/bugs/2060311)).
+  - Furthermore, a current issue may still cause `cloud-init` to run before the network is ready ([LP: #2144891](https://launchpad.net/bugs/2144891))
+
+* With the removal of the `crda` package in 22.04, the method of setting the WiFi regulatory domain (editing `/etc/default/crda`) no longer operates. On server images, use the `regulatory-domain` option in the Netplan configuration. On desktop images, append `cfg80211.ieee80211_regdom=GB` (substituting `GB` for the relevant country code) to the kernel command line in the `cmdline.txt` file on the boot partition  ([LP: #1951586](https://launchpad.net/bugs/1951586)).
+
+* On server images, re-authentication to WiFi APs when regulatory domain is set result in `dmesg` spam to the console ([LP: #2063365](https://launchpad.net/bugs/2063365))
+
+#### Netboot installs
+
+There is a bug ([LP: #2104316](https://bugs.launchpad.net/ubuntu-power-systems/+bug/2104297)) in the *beta* images that prevents netboot installs in some scenarios.
+
+#### cloud-init upgrade
+
+It has been reported that cloud-init may fail to upgrade properly in the Oracular to Plucky upgrade path, see [LP: #2104316](https://bugs.launchpad.net/ubuntu-power-systems/+bug/2104297).
+
+#### I/O scheduler
+
+A bug prevents the I/O scheduler from being reset to “none” ([LP: #2083845](https://bugs.launchpad.net/bugs/2083845)): the fix is already in Linux v6.11.2, and will be part of the first SRU kernel.
+
+#### FAN networking
+
+Support for FAN networking has been dropped in the 6.11 release kernel. It will be re-introduced in the next 6.11 kernel update shortly.
+
+#### POSIX ACL inheritance with `mkdir`
+
+POSIX Access Control Lists (ACLs) are not always appropriately inherited from parent directories. If a directory has ACLs set, and you create a directory path using `mkdir -p`, the created parents do not appropriately inherit ACLs.
+
+There is also a possibility of more open permissions being set for the directories.
+
+See the Ubuntu bug at [LP: #2138215](https://bugs.launchpad.net/ubuntu/+source/acl/+bug/2138215) and the upstream bug at [Issue #11036](https://github.com/uutils/coreutils/issues/11036).
+
+This issue was also present in Ubuntu 25.10.
+
 
 ## Official flavors
 
