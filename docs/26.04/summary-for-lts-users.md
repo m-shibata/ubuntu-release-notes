@@ -22,7 +22,14 @@ The following is an overview of the major changes.
 
 ### GNOME 50
 
-The GNOME desktop environment has been updated from version 46 to 50. Major highlights:
+The GNOME desktop environment has been updated to version 50. Notable changes since GNOME 46 found in  Ubuntu 24.04 LTS include the following:
+
+* GNOME 50:
+
+    ```{include} /reuse/26.04/gnome-50-news.txt
+    ```
+
+Other major highlights:
 
 * You can now set an application to start automatically after login in {menuselection}`Settings --> Apps`.
 * Fractional scaling factors are now optimized so as to minimize blur.
