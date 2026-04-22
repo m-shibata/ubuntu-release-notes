@@ -16,7 +16,7 @@ This virt-hwe stack is composed of the following source packages:
  - `edk2-hwe`
 
 Initially those are mostly identical to the base packages, but twice a year
-they will move to a newer release and become stable once the match the following
+they will move to a newer release and become stable once they match the following
 Ubuntu LTS release.
 They generally resolve the same dependencies as the base stack and are therefore
 interchangeable but mutually exclusive to each other.

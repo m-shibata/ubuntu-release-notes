@@ -445,7 +445,7 @@ interim release like {ref}`libvirt@24.10 <libvirt-24.10>`,
 {ref}`qemu@25.10 <qemu-25.04>`, or {ref}`edk2@25.10 <edk2-25.10>`
 are already so huge they can only cover a selected high-level summary.
 Each version adds various new emulated instructions, new CPU types and
-virtualized platforms, which would is beyond the scope of release notes.
+virtualized platforms, which would be beyond the scope of release notes.
 Here are just a few to motivate you to check out all the other
 per-release changes and the related upstream announcements.
 

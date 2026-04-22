@@ -795,7 +795,7 @@ Update to version 1.24.2. See the [upstream changelog](https://github.com/NLnetL
 #### Qemu - Handling Windows 11 upgrades
 
 * Upgrading [Windows 11 can make the VM stop working](https://bugs.launchpad.net/ubuntu/+source/qemu/+bug/2131822).
-  On the qemu version in 26.04 LTS this is already fixed right away. But to to fix this issue in 24.04 Noble
+  On the qemu version in 26.04 LTS this is already fixed right away. But to fix this issue in 24.04 Noble
   and 25.10 Questing we needed to add new machine types. To ensure the migration path to 26.04 LTS
   and ensure the migration path the same types are kept here as well:
 
@@ -805,7 +805,7 @@ Update to version 1.24.2. See the [upstream changelog](https://github.com/NLnetL
 
 Any newly started guest on these older releases will automatically pick up the
 new versions but due to the above still able to migrate.
-Action is only needed if you specified them old types explicitly in your old systems.
+Action is only needed if you specified the old types explicitly in your old systems.
 
 <!--
 ### Development fixes
