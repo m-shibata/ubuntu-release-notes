@@ -22,15 +22,61 @@ The following is an overview of the major changes.
 
 ### GNOME 50
 
-The GNOME desktop environment has been updated from version 46 to 50. Major highlights:
+The GNOME desktop environment has been updated to version 50. Notable changes since GNOME 46 found in Ubuntu 24.04 LTS include the following:
+
+:::{rubric} From GNOME 47
+:::
+
+* Support for small screens has been enhanced. Dialog windows are also more usable on narrow screens.
+* Screen recording can be hardware-accelerated.
+* Application rendering is now more responsive on slower devices.
+* Remote login sessions persist if you disconnect.
+* The file selection dialog is now based on the Files app, enabling more features.
+* The Files app improves the navigation of network resources and other locations. It also shows more information on your search progress.
+* Accessibility settings add the *Activate windows on hover* option.
+* Keyboard settings show a preview of your keyboard layout in the add dialog.
+* Power settings add new suspend timers for mobile devices.
+* The Web app can automatically fill forms, comes with a redesigned bookmarks sidebar and provides a privacy report.
+* In the Calendar app, the event details popover has been redesigned.
+
+:::{rubric} From GNOME 48
+:::
+
+* Notifications are now grouped by application to prevent the list from getting too long.
+* GNOME now includes the [triple buffering](https://discourse.ubuntu.com/t/triple-buffering-a-debrief/56314) feature from Ubuntu, improving responsiveness.
+* Certain core GNOME components now use less CPU and memory.
+* The image viewer now supports simple image editing.
+* Digital Wellbeing features are now available, including screen time limits and break reminders.
+* A new battery health preservation option is available.
+* The Calendar app now supports managing events across multiple timezones.
+* High Dynamic Range (HDR) output is now available for displays that support it.
+* The design of the Text Editor app has been improved.
+* Apps can now set up system-wide keyboard shortcuts.
+* New windows are now placed in the center of the screen by default.
+* Screen reader shortcuts, such as the {kbd}`CapsLock` Orca modifier, now function correctly in the Wayland session.
+
+:::{rubric} From GNOME 49
+:::
+
+* The calendar app is now fully accessible when using the keyboard.
+* The Web app improves ad-blocking, estimates page reading time, enhances security options and improves search.
+* The remote desktop solution now supports multi-touch input for touch screens, relative mouse input for gaming, and extended virtual monitors.
+* Media playback controls are now displayed on the lock screen.
+* The accessibility menu is now easier to find on the login screen.
+
+:::{rubric} From GNOME 50
+:::
+
+```{include} /reuse/26.04/gnome-50-news.txt
+```
+
+:::{rubric} Other major highlights
+:::
 
 * You can now set an application to start automatically after login in {menuselection}`Settings --> Apps`.
 * Fractional scaling factors are now optimized so as to minimize blur.
 * The default monospace font size has been reduced to match the default user interface font size. The monospace font is used in terminals and similar applications.
 * The [Sysprof](https://apps.gnome.org/Sysprof/) app is installed by default as a new system utility. This makes it easier to discover performance issues in your apps.
-
-    :::{versionadded} 24.10
-    :::
 
 For details, see the upstream release notes: [GNOME 47](https://release.gnome.org/47/), [GNOME 48](https://release.gnome.org/48/), [GNOME 49](https://release.gnome.org/49/) and [GNOME 50](https://release.gnome.org/50/).
 

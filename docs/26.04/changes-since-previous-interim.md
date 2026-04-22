@@ -139,7 +139,12 @@ Cryptography libraries have been updated to recent versions:
 
 #### GNOME 50
 
-The GNOME desktop environment has been updated to version 50.
+The GNOME desktop environment has been updated to version 50. Notable changes since GNOME 49 in Ubuntu 25.10 include the following:
+
+```{include} /reuse/26.04/gnome-50-news.txt
+```
+
+For details, see the [upstream release notes](https://release.gnome.org/50/).
 
 #### Resources replaces System Monitor
 

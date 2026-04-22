@@ -1092,6 +1092,7 @@ webdav
 webextensions
 webkitgtk
 webrick
+wellbeing
 whitepaper
 whitespace
 whitespaces
