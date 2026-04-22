@@ -794,16 +794,18 @@ Update to version 1.24.2. See the [upstream changelog](https://github.com/NLnetL
 
 #### Qemu - Handling Windows 11 upgrades
 
-* Upgrading [Windows 11 can make the VM stop working](https://bugs.launchpad.net/ubuntu/+source/qemu/+bug/2131822), to fix this issue and ensure the migration path, we added new machine types:
+* Upgrading [Windows 11 can make the VM stop working](https://bugs.launchpad.net/ubuntu/+source/qemu/+bug/2131822).
+  On the qemu version in 26.04 LTS this is already fixed right away. But to to fix this issue in 24.04 Noble
+  and 25.10 Questing we needed to add new machine types. To ensure the migration path to 26.04 LTS
+  and ensure the migration path the same types are kept here as well:
 
 * `pc-i440fx-questing-v2`
 * `pc-i440fx-noble-v2`
 * `pc-q35-noble-v2`
 
-This also affects the same guest on the related active releases, the CPU types with the fix have been provided there as well.
-Any newly started guest on these older releases will automatically pick up the new versions and now be able to migrate.
-Action is only needed if you specified them explicitly.
-26.04 and later is not affected right from the start.
+Any newly started guest on these older releases will automatically pick up the
+new versions but due to the above still able to migrate.
+Action is only needed if you specified them old types explicitly in your old systems.
 
 <!--
 ### Development fixes
