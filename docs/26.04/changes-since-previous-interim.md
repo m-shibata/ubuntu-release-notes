@@ -162,7 +162,12 @@ For a list of all changes and fixes, please check the [upstream releases page](h
 
 #### SoS (`sosreport`)
 
-SoS was updated to 4.10.2. This upgrade introduces new plugins and also adds new features to existing plugins.
+`sos` was updated to version 4.10.2. Key updates include:
+
+- The temporary directory has now been changed from `/tmp` to `/var/tmp`. This follows the change in `systemd-tmpfiles` and the cleaning of `/var/tmp`, and it aligns with other distributions.
+- Additional plugins include `aws` and `spyre`.
+- The OpenStack plugins have all been improved to obfuscate passwords more effectively and consistently.
+- Many other plugins have also been updated.
 
 For more information see the [4.10.1](https://github.com/sosreport/sos/releases/tag/4.10.1) and [4.10.2](https://github.com/sosreport/sos/releases/tag/4.10.2) upstream release notes.
 
