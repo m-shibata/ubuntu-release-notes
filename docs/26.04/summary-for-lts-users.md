@@ -80,44 +80,40 @@ The GNOME desktop environment has been updated to version 50. Notable changes si
 
 For details, see the upstream release notes: [GNOME 47](https://release.gnome.org/47/), [GNOME 48](https://release.gnome.org/48/), [GNOME 49](https://release.gnome.org/49/) and [GNOME 50](https://release.gnome.org/50/).
 
-#### Added GNOME Shell search provider for snap applications
+### Added a GNOME Shell search provider for snap applications
+:::{versionadded} 26.04
+:::
 
-GNOME Shell global search gained the ability to search for the available snap
-applications that match the search criteria.
+```{include} /reuse/26.04/snap-search-provider.txt
+```
 
-This feature can be disabled in the Search panel of the Settings app.
+### Added a GNOME Shell search provider for web search
+:::{versionadded} 26.04
+:::
 
-#### Added GNOME Shell search provider for web search
+```{include} /reuse/26.04/web-search-provider.txt
+```
 
-It's now possible to initiate a web search with the user default browser from
-the GNOME Shell global search in the overview.
+### Accessibility improvements and fixes
+:::{versionadded} 26.04
+:::
 
-This feature can be disabled in the Search panel of the Settings app.
+```{include} /reuse/26.04/gnome-accessibility-improvements.txt
+```
 
-#### Accessibility improvements and fixes
+### Yaru theme updates
+:::{versionadded} 26.04
+:::
 
-On top of the upstream improvements, the ubuntu extensions and have been
-improved to address better various accessibility requirements
+```{include} /reuse/26.04/yaru-updates.txt
+```
 
-#### Yaru theme updates
+### Improved integration with snap applications
+:::{versionadded} 26.04
+:::
 
-[Yaru theme](https://github.com/ubuntu/yaru) got major updates gaining a look
-closer to the upstream one, and with lots icon updates.
-
-#### Improved integration with snap applications
-
-Snap applications using [XDG Desktop Portals](https://flatpak.github.io/xdg-desktop-portal/) are now better integrated into the desktop, and users can
-fully manage their access permissions and be able to any resource outside the
-confinement in a natural way.
-
-In particular:
-
-* It's possible to open files or directories located in any path of the system
-  with other desktop applications (for example it's possible to open any file
-  with the file-manager using a snap application, wherever it is located, and
-  both with explicit open or via drang-and-drop).
-* It's possible to use Camera, Notification, USB and other XDG Desktop portals
-* Snap application portal permissions can be controlled in GNOME Settings
+```{include} /reuse/26.04/snap-desktop-integration.txt
+```
 
 
 ### New document viewer

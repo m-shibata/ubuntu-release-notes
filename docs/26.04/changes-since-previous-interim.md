@@ -31,33 +31,28 @@ For details, see the [upstream release notes](https://release.gnome.org/50/).
 
 #### Added a GNOME Shell search provider for snap applications
 
-The GNOME Shell global search gained the ability to search for the available snap applications that match the search criteria.
-
-This feature can be disabled in the Search panel of the Settings app.
+```{include} /reuse/26.04/snap-search-provider.txt
+```
 
 #### Added a GNOME Shell search provider for web search
 
-You can now initiate a web search with your default browser from the GNOME Shell global search in the overview.
-
-This feature can be disabled in the Search panel of the Settings app.
+```{include} /reuse/26.04/web-search-provider.txt
+```
 
 #### Accessibility improvements and fixes
 
-On top of the upstream improvements, the Ubuntu extensions have been improved to better address various accessibility requirements.
+```{include} /reuse/26.04/gnome-accessibility-improvements.txt
+```
 
 #### Yaru theme updates
 
-The [Yaru theme](https://github.com/ubuntu/yaru) has moved closer to the looks of the upstream GNOME theme. It has also received many icon updates.
+```{include} /reuse/26.04/yaru-updates.txt
+```
 
 #### Improved integration with snap applications
 
-Snap applications using [XDG Desktop Portals](https://flatpak.github.io/xdg-desktop-portal/) are now better integrated into the desktop. Users can fully manage their access permissions and reach resources outside of the application's confinement in a natural way.
-
-In particular:
-
-* It's possible to open files or directories located in any path of the system with other desktop applications. For example, it's possible to open any file regardless of its location with the file manager using a snap application. This applies both to opening the file explicitly and using drag-and-drop.
-* It's possible to use Camera, Notification, USB and other XDG Desktop portals.
-* Snap application portal permissions can be controlled in GNOME Settings.
+```{include} /reuse/26.04/snap-desktop-integration.txt
+```
 
 #### A new color palette in the terminal
 
