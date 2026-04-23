@@ -29,6 +29,31 @@ For details, see the [upstream release notes](https://release.gnome.org/50/).
 ```{include} /reuse/26.04/gnome-resources.txt
 ```
 
+#### Added a GNOME Shell search provider for snap applications
+
+```{include} /reuse/26.04/snap-search-provider.txt
+```
+
+#### Added a GNOME Shell search provider for web search
+
+```{include} /reuse/26.04/web-search-provider.txt
+```
+
+#### Accessibility improvements and fixes
+
+```{include} /reuse/26.04/gnome-accessibility-improvements.txt
+```
+
+#### Yaru theme updates
+
+```{include} /reuse/26.04/yaru-updates.txt
+```
+
+#### Improved integration with snap applications
+
+```{include} /reuse/26.04/snap-desktop-integration.txt
+```
+
 #### A new color palette in the terminal
 
 The terminal app (Ptyxis) brings a new Ubuntu color palette with accessible color-contrast and a light-theme variant.
@@ -48,6 +73,10 @@ Graphical controls to finely control Ubuntu Insights consent states as well as t
 After a release upgrade, you'll be prompted for consent to collect system information via Ubuntu Insights. This prompt only appears if Ubuntu Insights consent isn't already set or if it's deemed necessary to re-prompt due to any other reason.
 
 This change is part of creating a new release upgrade mode for GNOME Initial Setup.
+
+#### Fingerprint improvements
+
+The [libfprint](https://gitlab.freedesktop.org/libfprint/libfprint/) library now supports drivers using the [Secure Device Connection Protocol](https://github.com/microsoft/SecureDeviceConnectionProtocol) (for [TOD drivers](https://gitlab.freedesktop.org/3v1n0/libfprint/-/releases/v1.95.1+tod1)) and many new devices.
 
 ### Server features
 
