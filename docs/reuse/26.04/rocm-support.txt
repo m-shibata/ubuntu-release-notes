@@ -21,7 +21,7 @@ Note that currently, {ref}`resolute-gfx908-blender-tests-issue`.
 :::
 
 ::::{dropdown} ROCm libraries
-The following individual ROCm libraries included, listed by source package name:
+The following individual ROCm libraries are included, listed by source package name:
 
 :::{hlist}
 :columns: 3
